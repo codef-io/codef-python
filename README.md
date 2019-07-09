@@ -6,6 +6,14 @@ Python sample for CODEF API
 본 샘플은 CODEF API의 연동을 위한 공통 코드를 포함하고 있으며, 지원하는 모든 API의 엔드포인트(은행, 카드, 보험, 증권, 공공, 기타)는
 https://develpers.codef.io/abcd 를 통해 확인할 수 있습니다.
 
+## CODEF API Env
+
+CODEF는 원활한 개발을 위해 샌드박스, 개발, 운영 환경을 각각 제공한다.
+
+샌드박스 : https://sandbox.codef.io
+개발 : https://development.codef.io
+운영 : https://api.codef.io
+
 ## Getting Started
 
 ### 계정 생성
@@ -14,7 +22,7 @@ CODEF API를 사용하기 위해서는 엔드유저가 사용하는 대상기관
 이후에는 별도의 인증수단 전송 없이 'connected_id'를 통해서 대상기관의 데이터를 연동할 수 있습니다.
 
 ```python
-codef_account_create_url = 'https://codef.io/account/create'
+codef_account_create_url = 'https://api.codef.io/account/create'
 codef_account_create_body = {
             'accountList':[                    # 계정목록
                 {
@@ -42,7 +50,7 @@ connected_id = dict['data']['connectedId']
 'connected_id'를 통해서 대상기관의 데이터를 연동할 수 있습니다.
 
 ```python
-codef_account_add_url = 'https://codef.io/account/add'
+codef_account_add_url = 'https://api.codef.io/account/add'
 codef_account_add_body = {
             'connectedId': '계정생성 시 발급받은 아이디',    # connected_id
             'accountList':[                    # 계정목록
@@ -69,7 +77,7 @@ response_account_add = http_sender(codef_account_add_url, token, codef_account_a
 'connected_id'를 통해서 대상기관의 데이터를 연동할 수 있습니다.
 
 ```python
-codef_account_update_url = 'https://codef.io/account/update'
+codef_account_update_url = 'https://api.codef.io/account/update'
 codef_account_update_body = {
             'connectedId': '계정생성 시 발급받은 아이디',    # connected_id
             'accountList':[                    # 계정목록
@@ -97,7 +105,7 @@ response_account_update = http_sender(codef_account_update_url, token, codef_acc
 해당 데이터는 복구할 수 없습니다.
 
 ```python
-codef_account_delete_url = 'https://codef.io/account/delete'
+codef_account_delete_url = 'https://api.codef.io/account/delete'
 codef_account_delete_body = {
             'connectedId': '계정생성 시 발급받은 아이디',    # connected_id
             'accountList':[                    # 계정목록
