@@ -8,7 +8,7 @@ https://develpers.codef.io/abcd 를 통해 확인할 수 있습니다.
 
 ## CODEF API Env
 
-CODEF는 원활한 개발을 위해 샌드박스, 개발, 운영 환경을 각각 제공한다.
+CODEF API는 원활한 개발을 위해 샌드박스, 개발, 운영 환경을 각각 제공한다.
 
 샌드박스 : https://sandbox.codef.io
 개발 : https://development.codef.io
