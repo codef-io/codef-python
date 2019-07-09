@@ -79,7 +79,7 @@ response_account_add = http_sender(codef_account_add_url, token, codef_account_a
 'connected_id'를 통해서 대상기관의 데이터를 연동할 수 있습니다.
 
 ```python
-codef_account_update_url = 'https://codef.io/account/add'
+codef_account_update_url = 'https://codef.io/account/update'
 codef_account_update_body = {
             'connectedId': '계정생성 시 발급받은 아이디',    # connected_id
             'accountList':[                    # 계정목록
@@ -108,8 +108,36 @@ response_account_update = http_sender(codef_account_update_url, token, codef_acc
 
 ### 계정 삭제
 
+엔드유저가 등록된 계정의 삭제를 요청 시 'connected_id'에 등록된 기관의 인증수단을 즉시 삭제할 수 있습니다. 요청한 기관의 인증 수단은 호출 즉시 삭제되며,
+해당 데이터는 복구할 수 없습니다.
 
-각 엔드포인트는 JSON을 포함한 HTTP 응답을 리턴합니다.
+```python
+codef_account_delete_url = 'https://codef.io/account/delete'
+codef_account_delete_body = {
+            'connectedId': '계정생성 시 발급받은 아이디',    # connected_id
+            'accountList':[                    # 계정목록
+                {
+                    'organization':'0003',     # 기관코드
+                    'loginType':'0',           # 로그인타입 (0: 인증서, 1: ID/PW)
+                    'password':'1234',         # 인증서 비밀번호             
+                    'derFile':'인증서 DerFile',  # Base64String
+                    'keyFile':'인증서 KeyFile'   # Base64String
+                }
+            ]
+}
+
+# CODEF API 호출
+response_account_update = http_sender(codef_account_delete_url, token, codef_account_delete_body)
+
+...
+
+# request codef_api
+response_account_delete = http_sender(codef_account_delete_url, token, codef_account_delete_body)
+```
+```json
+{"result":{"code":"CF-00000","extraMessage":"","message":"정상"},"data":{"organizationList":[{"loginType":"0","organization":"0003"}],"connectedId":"8-cXc.6lk-ib4Whi5zClVt"}}
+```
+
 
 ### Errors
 
