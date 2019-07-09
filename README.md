@@ -33,9 +33,9 @@ response_account_create = http_sender(codef_account_create_url, token, codef_acc
 ...
 
 # request codef_api
-        response = http_sender(codef_account_create_url, token, codef_account_create_body)
-        dict = json.loads(urllib.unquote_plus(response.text.encode('utf8')))
-        connected_id = dict['data']['connectedId']
+response_account_create = http_sender(codef_account_create_url, token, codef_account_create_body)
+dict = json.loads(urllib.unquote_plus(response.text.encode('utf8')))
+connected_id = dict['data']['connectedId']
 ```
 
 ### 계정 추가
