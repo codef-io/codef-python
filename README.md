@@ -10,7 +10,8 @@ https://develpers.codef.io/abcd 를 통해 확인할 수 있습니다.
 
 ### 계정 등록
 
-사용자의
+CODEF API를 사용하기 위해서는 엔드유저가 사용하는 대상기관의 인증수단 등록이 필요하며, 이를 통해 connected_id를 발급받을 수 있습니다.
+이후에는 별도의 인증수단 전송 없이 connected_id를 통해서 대상기관의 데이터를 연동할 수 있습니다.
 
 ```python
 codef_account_create_url = 'https://codef.io/account/create'
@@ -28,6 +29,13 @@ codef_account_create_body = {
 
 # CODEF API 호출
 response_account_create = http_sender(codef_account_create_url, token, codef_account_create_body)
+
+...
+
+# request codef_api
+        response = http_sender(codef_account_create_url, token, codef_account_create_body)
+        dict = json.loads(urllib.unquote_plus(response.text.encode('utf8')))
+        connected_id = dict['data']['connectedId']
 ```
 
 ### 계정 추가
