@@ -15,6 +15,7 @@ def http_sender(url, token, body):
 
     print('response.status_code = ' + str(response.status_code))
     print('response.text = ' + urllib.unquote_plus(response.text.encode('utf8')))
+
     return response
 # ========== HTTP 함수  ==========
 
@@ -97,6 +98,10 @@ if response_account_create.status_code == 401:      # token error
 
         # request codef_api
         response = http_sender(codef_account_create_url, token, codef_account_create_body)
+        dict = json.loads(urllib.unquote_plus(response.text.encode('utf8')))
+        connected_id = dict['data']['connectedId']
+        print('connected_id = ' + connected_id)
+        print('계정생성 정상처리')
 
         # codef_api 응답 결과
         print(response.status_code)
@@ -104,7 +109,10 @@ if response_account_create.status_code == 401:      # token error
     else:
         print('토큰발급 오류')
 else:
-    print('정상처리')
+    dict = json.loads(urllib.unquote_plus(response_account_create.text.encode('utf8')))
+    connected_id = dict['data']['connectedId']
+    print('connected_id = ' + connected_id)
+    print('계정생성 정상처리')
 
 
 
@@ -124,7 +132,7 @@ else:
 ##############################################################################
 codef_account_add_url = 'http://192.168.10.126:10001/account/add'
 codef_account_add_body = {
-            'connectedId': '6XuGzyZa4H2aFuEljnqLt6',
+            'connectedId': '8-cXc.6lk-ib4Whi5zClVt',    # connected_id
             'accountList':[
                 {
                     'organization':'0003',
@@ -154,6 +162,7 @@ if response_account_create.status_code == 401:      # token error
 
         # request codef_api
         response = http_sender(codef_account_add_url, token, codef_account_add_body)
+        print('계정추가 정상처리')
 
         # codef_api 응답 결과
         print(response.status_code)
@@ -161,7 +170,7 @@ if response_account_create.status_code == 401:      # token error
     else:
         print('토큰발급 오류')
 else:
-    print('정상처리')
+    print('계정추가 정상처리')
 
 
 
@@ -181,7 +190,7 @@ else:
 ##############################################################################
 codef_account_update_url = 'http://192.168.10.126:10001/account/update'
 codef_account_update_body = {
-            'connectedId': '6XuGzyZa4H2aFuEljnqLt6',
+            'connectedId': '8-cXc.6lk-ib4Whi5zClVt',        # connected_id
             'accountList':[
                 {
                     'organization':'0003',
@@ -211,6 +220,10 @@ if response_account_create.status_code == 401:      # token error
 
         # request codef_api
         response = http_sender(codef_account_update_url, token, codef_account_update_body)
+        dict = json.loads(urllib.unquote_plus(response.text.encode('utf8')))
+        connected_id = dict['data']['connectedId']
+        print('connected_id = ' + connected_id)
+        print('계정수정 정상처리')
 
         # codef_api 응답 결과
         print(response.status_code)
@@ -218,7 +231,10 @@ if response_account_create.status_code == 401:      # token error
     else:
         print('토큰발급 오류')
 else:
-    print('정상처리')
+    dict = json.loads(urllib.unquote_plus(response_account_create.text.encode('utf8')))
+    connected_id = dict['data']['connectedId']
+    print('connected_id = ' + connected_id)
+    print('계정수정 정상처리')
 
 
 
@@ -238,7 +254,7 @@ else:
 ##############################################################################
 codef_account_delete_url = 'http://192.168.10.126:10001/account/delete'
 codef_account_delete_body = {
-            'connectedId': '6XuGzyZa4H2aFuEljnqLt6',
+            'connectedId': '8-cXc.6lk-ib4Whi5zClVt',        # connected_id
             'accountList':[
                 {
                     'organization':'0003',
@@ -268,6 +284,10 @@ if response_account_create.status_code == 401:      # token error
 
         # request codef_api
         response = http_sender(codef_account_delete_url, token, codef_account_delete_body)
+        dict = json.loads(urllib.unquote_plus(response.text.encode('utf8')))
+        connected_id = dict['data']['connectedId']
+        print('connected_id = ' + connected_id)
+        print('계정삭제 정상처리')
 
         # codef_api 응답 결과
         print(response.status_code)
@@ -275,4 +295,7 @@ if response_account_create.status_code == 401:      # token error
     else:
         print('토큰발급 오류')
 else:
-    print('정상처리')
+    dict = json.loads(urllib.unquote_plus(response_account_create.text.encode('utf8')))
+    connected_id = dict['data']['connectedId']
+    print('connected_id = ' + connected_id)
+    print('계정삭제 정상처리')
