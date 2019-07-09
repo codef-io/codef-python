@@ -2,6 +2,7 @@
 # UTF-8 encoding when using korean
 
 import requests, json, base64
+import urllib
 
 # ========== HTTP 기본 함수 ==========
 
@@ -12,8 +13,8 @@ def http_sender(url, token, body):
 
     response = requests.post(url, headers = headers, data = json.dumps(body))
 
-    print(response.text)
-    print(response.status_code)
+    print('response.status_code = ' + str(response.status_code))
+    print('response.text = ' + urllib.unquote_plus(response.text.encode('utf8')))
 
     return response
 # ========== HTTP 함수  ==========
@@ -30,8 +31,8 @@ def request_token(url, client_id, client_secret):
 
     response = requests.post(url, headers = headers, data = 'grant_type=client_credentials&scope=read')
 
-    print(response.text)
-    print(response.status_code)
+    print('response.status_code = ' + str(response.status_code))
+    print('response.text = ' + urllib.unquote_plus(response.text.encode('utf8')))
 
     return response
 # ========== Toekn 재발급  ==========
@@ -62,6 +63,7 @@ body = {
 
 # CODEF API 요청
 response_codef_api = http_sender(codef_url + account_list_path, token, body)
+
 # token error
 if response_codef_api.status_code == 401:
     dict = json.loads(response_codef_api.text)
@@ -82,6 +84,9 @@ if response_codef_api.status_code == 401:
         response = http_sender(codef_url + account_list_path, token, body)
 
         # codef_api 응답 결과
-        print('access_token = ' + token)
+        print(response.status_code)
+        print(response.text)
+    else:
+        print('토큰발급 오류')
 else:
     print('정상처리')
