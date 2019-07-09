@@ -8,17 +8,15 @@ https://develpers.codef.io/abcd 를 통해 확인할 수 있습니다.
 
 ## Getting Started
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
-
-### Prerequisites
-
-What things you need to install the software and how to install them
+### Calling Endpoints
 
 ```
 Give examples
 ```
 
-### Installing
+각 엔드포인트는 JSON을 포함한 HTTP 응답을 리턴합니다.
+
+### Errors
 
 A step by step series of examples that tell you how to get a development env running
 
