@@ -12,8 +12,8 @@ https://develpers.codef.io/abcd 를 통해 확인할 수 있습니다.
 
 사용자의
 
-```
-codef_account_create_url = <font color="green">'https://codef.io/account/create'</font>
+```python
+codef_account_create_url = 'https://codef.io/account/create'
 codef_account_create_body = {
             'accountList':[                    # 계정목록
                 {
