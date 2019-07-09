@@ -37,6 +37,9 @@ response_account_create = http_sender(codef_account_create_url, token, codef_acc
 dict = json.loads(urllib.unquote_plus(response.text.encode('utf8')))
 connected_id = dict['data']['connectedId']
 ```
+```json
+{"result":{"code":"CF-00000","extraMessage":"","message":"정상"},"data":{"organizationList":[{"loginType":"0","organization":"0003"}],"connectedId":"1rZjLWFDQTAbWI-9weTq03"}}
+```
 
 ### 계정 추가
 
@@ -65,6 +68,9 @@ response_account_add = http_sender(codef_account_add_url, token, codef_account_a
 
 # request codef_api
 response_account_add = http_sender(codef_account_add_url, token, codef_account_add_body)
+```
+```json
+{"result":{"code":"CF-94004","extraMessage":"","message":"이미 계정이 등록된 기관입니다. 기존 계정 먼저 삭제하세요."},"data":{"organizationList":[{"loginType":"0","organization":"0003"}],"connectedId":"1rZjLWFDQTAbWI-9weTq03"}}
 ```
 
 ### 계정 수정
