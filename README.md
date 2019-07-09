@@ -8,11 +8,34 @@ https://develpers.codef.io/abcd 를 통해 확인할 수 있습니다.
 
 ## Getting Started
 
-### Calling Endpoints
+### 계정 등록
+
+사용자의
 
 ```
-Give examples
+codef_account_create_url = 'http://192.168.10.126:10001/account/create'
+codef_account_create_body = {
+            'accountList':[                    # 계정목록
+                {
+                    'organization':'0003',     # 기관코드
+                    'loginType':'0',           # 로그인타입 (0: 인증서, 1: ID/PW)
+                    'password':'1234',         # 인증서 비밀번호             
+                    'derFile':'인증서 DerFile',  # Base64String
+                    'keyFile':'인증서 KeyFile'   # Base64String
+                }
+            ]
+}
+
+# CODEF API 호출
+response_account_create = http_sender(codef_account_create_url, token, codef_account_create_body)
 ```
+
+### 계정 추가
+
+### 계정 수정
+
+### 계정 삭제
+
 
 각 엔드포인트는 JSON을 포함한 HTTP 응답을 리턴합니다.
 
