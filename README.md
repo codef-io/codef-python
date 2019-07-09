@@ -29,11 +29,6 @@ codef_account_create_body = {
 
 # CODEF API 호출
 response_account_create = http_sender(codef_account_create_url, token, codef_account_create_body)
-
-...
-
-# request codef_api
-response_account_create = http_sender(codef_account_create_url, token, codef_account_create_body)
 dict = json.loads(urllib.unquote_plus(response.text.encode('utf8')))
 connected_id = dict['data']['connectedId']
 ```
@@ -63,11 +58,6 @@ codef_account_add_body = {
 
 # CODEF API 호출
 response_account_add = http_sender(codef_account_add_url, token, codef_account_add_body)
-
-...
-
-# request codef_api
-response_account_add = http_sender(codef_account_add_url, token, codef_account_add_body)
 ```
 ```json
 {"result":{"code":"CF-94004","extraMessage":"","message":"이미 계정이 등록된 기관입니다. 기존 계정 먼저 삭제하세요."},"data":{"organizationList":[{"loginType":"0","organization":"0003"}],"connectedId":"1rZjLWFDQTAbWI-9weTq03"}}
@@ -94,11 +84,6 @@ codef_account_update_body = {
 }
 
 # CODEF API 호출
-response_account_update = http_sender(codef_account_update_url, token, codef_account_update_body)
-
-...
-
-# request codef_api
 response_account_update = http_sender(codef_account_update_url, token, codef_account_update_body)
 ```
 ```json
@@ -127,11 +112,6 @@ codef_account_delete_body = {
 }
 
 # CODEF API 호출
-response_account_update = http_sender(codef_account_delete_url, token, codef_account_delete_body)
-
-...
-
-# request codef_api
 response_account_delete = http_sender(codef_account_delete_url, token, codef_account_delete_body)
 ```
 ```json
