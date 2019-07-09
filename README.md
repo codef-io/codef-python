@@ -148,9 +148,9 @@ response_account_delete = http_sender(codef_account_delete_url, token, codef_acc
 ```
 
 
-### Errors
+### 오류
 
-CODEF API 오류는 HTTP status code 와 CODEF ErrorCodef로 분류합니다.
+CODEF API 오류는 HTTP status code 와 CODEF API ErrorCode로 분류합니다.
 
 HTTP 401 - OAuth2.0 토큰 만료
 ```json
@@ -163,18 +163,8 @@ HTTP 401 - OAuth2.0 토큰 만료
 ```
 
 
-## Authors
-
-* **Billie Thompson** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
-
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
+## Contributing
 
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
-
-## Acknowledgments
-
-* Hat tip to anyone whose code was used
-* Inspiration
-* etc
