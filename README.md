@@ -16,6 +16,7 @@ CODEF API는 원활한 개발을 위해 샌드박스, 개발, 운영 환경을 �
 
 ## Getting Started
 
+
 ### OAuth2.0
 
 CODEF API를 사용하기 위해서는 'access_token' 발행이 선행되어야 하며, 거래 시 Header 에 포함하여 요청합니다.
@@ -36,6 +37,7 @@ response_oauth = request_token(token_url, "codef_master", "codef_master_secret")
 ```json
 {"access_token":"eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzZXJ2aWNlX3R5cGUiOiIwIiwic2NvcGUiOlsicmVhZCJdLCJzZXJ2aWNlX25vIjoiMDAwMDAwMDQyMDAxIiwiZXhwIjoxNTYyNjc0NTczLCJhdXRob3JpdGllcyI6WyJJTlNVUkFOQ0UiLCJQVUJMSUMiLCJCQU5LIiwiRVRDIiwiU1RPQ0siLCJDQVJEIl0sImp0aSI6ImFiNTBjM2RmLWQ3MzctNGE2Ny04Zjg4LWQzOTE2YTNiYmNiMSIsImNsaWVudF9pZCI6ImNvZGVmX21hc3RlciJ9.EXBV-D89_zoYmFdiULahGqcp1T2Du8DM51Trf1fD4MxsKYsA1t37ovffIKIQvqLHwQz4W8EqC6s8lM1V_IqFG5D5yafmyvprVi7ciqRMBBIsnEZN8xk1gBqLydtwkG0jKTrCLTBls8zATHbWV8BO6oUw8fwQId4ExeewbqeflSBCLOztb4c8UkR1WFDqQs63Ezry8k79VN5HPSktChJGnGq0xWmtbMlwv8IubvveJkMLz-6Iw6hlSMjeat_fv-gZCPTPdoaMa-BPxcAhI772cSCrfJNzori0uVFIeBEInabDzAKpXjvbsZEz_q70QGGSPkoslxFb_N-MYSNPgCWEvw","token_type":"bearer","expires_in":9,"scope":"read"}
 ```
+
 
 ### 계정 생성
 
@@ -65,6 +67,7 @@ connected_id = dict['data']['connectedId']
 {"result":{"code":"CF-00000","extraMessage":"","message":"정상"},"data":{"organizationList":[{"loginType":"0","organization":"0003"}],"connectedId":"1rZjLWFDQTAbWI-9weTq03"}}
 ```
 
+
 ### 계정 추가
 
 계정 생성을 통해 발급받은 'connected_id'에 추가 기관의 인증수단을 등록할 수 있습니다. 추가 등록한 기관을 포함하여 이후에는 별도의 인증수단 전송없이
@@ -91,6 +94,7 @@ response_account_add = http_sender(codef_account_add_url, token, codef_account_a
 ```json
 {"result":{"code":"CF-94004","extraMessage":"","message":"이미 계정이 등록된 기관입니다. 기존 계정 먼저 삭제하세요."},"data":{"organizationList":[{"loginType":"0","organization":"0003"}],"connectedId":"1rZjLWFDQTAbWI-9weTq03"}}
 ```
+
 
 ### 계정 수정
 
@@ -150,19 +154,19 @@ response_account_delete = http_sender(codef_account_delete_url, token, codef_acc
 
 ### CODEF API(법인 보유계좌조회)
 
-엔드유저가 등록된 계정의 삭제를 요청 시 'connected_id'에 등록된 기관의 인증수단을 즉시 삭제할 수 있습니다. 요청한 기관의 인증 수단은 호출 즉시 삭제되며,
-해당 데이터는 복구할 수 없습니다.
+발급받은 'connected_id' 를 통해 등록된 기관의 보유계좌를 조회할 수 있습니다.
 
+TestKR_BK_1_B_001.py
 ```python
 # CodefURL
-codef_url = 'http://192.168.10.126:10001'
-token_url = 'http://192.168.10.126:8888/oauth/token'
+codef_url = 'https://api.codef.io'
+token_url = 'https://api.codef.io/oauth/token'
 
 # 은행 법인 보유계좌
 account_list_path = '/v1/kr/bank/b/account/list'
 
 # 기 발급된 토큰
-token ='auth token'
+token =''     #access_token
 
 # BodyData
 body = {
@@ -221,6 +225,7 @@ HTTP 401 - OAuth2.0 토큰 만료
 
 
 ## Contributing
+
 
 ## License
 
