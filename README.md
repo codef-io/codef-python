@@ -224,9 +224,10 @@ HTTP 401 - OAuth2.0 토큰 만료
 ```
 
 
-## Contributing
+## Change Log
 
+CODEF API의 변경내을 [CHANGELOG.md](CHANGELOG.md) 을 통해 확인할 수 있습니다.
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details
