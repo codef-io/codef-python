@@ -28,7 +28,7 @@ response_oauth = request_token(token_url, "codef_master", "codef_master_secret")
         dict = json.loads(response_oauth.text)
         # reissue_token
         token = dict['access_token']
-        
+
         print('access_token = ' + token)
     else:
         print('토큰발급 오류')
@@ -148,6 +148,63 @@ response_account_delete = http_sender(codef_account_delete_url, token, codef_acc
 ```
 
 
+### CODEF API(법인 보유계좌조회)
+
+엔드유저가 등록된 계정의 삭제를 요청 시 'connected_id'에 등록된 기관의 인증수단을 즉시 삭제할 수 있습니다. 요청한 기관의 인증 수단은 호출 즉시 삭제되며,
+해당 데이터는 복구할 수 없습니다.
+
+```python
+# CodefURL
+codef_url = 'http://192.168.10.126:10001'
+token_url = 'http://192.168.10.126:8888/oauth/token'
+
+# 은행 법인 보유계좌
+account_list_path = '/v1/kr/bank/b/account/list'
+
+# 기 발급된 토큰
+token ='auth token'
+
+# BodyData
+body = {
+    'connected_id':'9LUm.uhVQbzaangazwI0tr',
+    'organization':'0011'
+}
+
+# CODEF API 요청
+response_codef_api = http_sender(codef_url + account_list_path, token, body)
+
+# token error
+if response_codef_api.status_code == 401:
+    dict = json.loads(response_codef_api.text)
+    # invalid_token
+    print('error = ' + dict['error'])
+    # Cannot convert access token to JSON
+    print('error_description = ' + dict['error_description'])
+
+    # reissue token
+    response_oauth = request_token(token_url, "codef_master", "codef_master_secret");
+    if response_oauth.status_code == 200:
+        dict = json.loads(response_oauth.text)
+        # reissue_token
+        token = dict['access_token']
+        print('access_token = ' + token)
+
+        # request codef_api
+        response = http_sender(codef_url + account_list_path, token, body)
+
+        # codef_api 응답 결과
+        print(response.status_code)
+        print(response.text)
+    else:
+        print('토큰발급 오류')
+else:
+    print('정상처리')
+```
+```json
+{"result":{"code":"CF-94002","extraMessage":"","message":"사용자+계정정보+설정에+실패했습니다."},"data":{}}
+```
+
+
 ### 오류
 
 CODEF API 오류는 HTTP status code 와 CODEF API ErrorCode로 분류합니다.
@@ -157,7 +214,7 @@ HTTP 401 - OAuth2.0 토큰 만료
 {"error":"invalid_token","error_description":"Cannot convert access token to JSON","code":"CF-99997","message":"OAUTH2.0 토큰 에러입니다. 메시지를 확인하세요."}
 ```
 
-그 외 오류 HTTP 200 - CODEF 오류 변환(CF-XXXXX) 
+그 외 오류 HTTP 200 - CODEF 오류 변환(CF-XXXXX)
 ```json
 {"result":{"code":"CF-94002","extraMessage":"","message":"사용자 계정정보 설정에 실패했습니다."},"data":{}}
 ```
