@@ -67,7 +67,7 @@ token ='eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzZXJ2aWNlX3R5cGUiOiIwIiwic2NvcGU
 #   keyFile : 인증서 keyFile
 #
 ##############################################################################
-codef_account_create_url = 'http://192.168.10.126:10001/account/create'
+codef_account_create_url = 'http://192.168.10.126:10001/v1/account/create'
 codef_account_create_body = {
             'accountList':[
                 {
@@ -130,7 +130,7 @@ else:
 #   keyFile : 인증서 keyFile
 #
 ##############################################################################
-codef_account_add_url = 'http://192.168.10.126:10001/account/add'
+codef_account_add_url = 'http://192.168.10.126:10001/v1/account/add'
 codef_account_add_body = {
             'connectedId': '8-cXc.6lk-ib4Whi5zClVt',    # connected_id
             'accountList':[
@@ -188,7 +188,7 @@ else:
 #   keyFile : 인증서 keyFile
 #
 ##############################################################################
-codef_account_update_url = 'http://192.168.10.126:10001/account/update'
+codef_account_update_url = 'http://192.168.10.126:10001/v1/account/update'
 codef_account_update_body = {
             'connectedId': '8-cXc.6lk-ib4Whi5zClVt',        # connected_id
             'accountList':[
@@ -252,7 +252,7 @@ else:
 #   keyFile : 인증서 keyFile
 #
 ##############################################################################
-codef_account_delete_url = 'http://192.168.10.126:10001/account/delete'
+codef_account_delete_url = 'http://192.168.10.126:10001/v1/account/delete'
 codef_account_delete_body = {
             'connectedId': '8-cXc.6lk-ib4Whi5zClVt',        # connected_id
             'accountList':[
