@@ -20,8 +20,8 @@ def fileToBase64(filepath):
     return base64.b64encode(data).decode('utf-8')
 # ========== Encode binary file data  ==========
 
-derFileB64 = fileToBase64('/Users/skcrackers/Documents/cobweb/Modules/certification/ssk/signCert.der')
-keyFileB64 = fileToBase64('/Users/skcrackers/Documents/cobweb/Modules/certification/ssk/signPri.key')
+derFileB64 = fileToBase64('/Users/skcrackers/Documents/cobweb/Modules/modules/certification/ssk/signCert.der')
+keyFileB64 = fileToBase64('/Users/skcrackers/Documents/cobweb/Modules/modules/certification/ssk/signPri.key')
 
 print('derFileB64 = ' + derFileB64)
 print('keyFileB64 = ' + keyFileB64)
