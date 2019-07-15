@@ -21,6 +21,7 @@ def http_sender(url, token, body):
 
 # ========== Toekn 재발급  ==========
 def request_token(url, client_id, client_secret):
+    print('========== request_token ========== ')
     authHeader = stringToBase64(client_id + ':' + client_secret)
 
     headers = {
@@ -46,8 +47,9 @@ def base64ToString(b):
 # ========== Encode string data  ==========
 
 # CodefURL
-codef_url = 'http://192.168.10.126:10001'
-token_url = 'http://192.168.10.126:8888/oauth/token'
+# codef_url = 'https://tapi.codef.io'
+codef_url = 'https://tapi.codef.io'
+token_url = 'https://toauth.codef.io/oauth/token'
 
 # 은행 법인 보유계좌
 account_list_path = '/v1/kr/bank/b/account/account-list'
@@ -64,8 +66,10 @@ body = {
 # CODEF API 요청
 response_codef_api = http_sender(codef_url + account_list_path, token, body)
 
+if response_codef_api.status_code == 200:
+    print('정상처리')
 # token error
-if response_codef_api.status_code == 401:
+elif response_codef_api.status_code == 401:
     dict = json.loads(response_codef_api.text)
     # invalid_token
     print('error = ' + dict['error'])
@@ -89,4 +93,4 @@ if response_codef_api.status_code == 401:
     else:
         print('토큰발급 오류')
 else:
-    print('정상처리')
+    print('API 요청 오류')
