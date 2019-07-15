@@ -21,7 +21,6 @@ def http_sender(url, token, body):
 
 # ========== Toekn 재발급  ==========
 def request_token(url, client_id, client_secret):
-    print('========== request_token ========== ')
     authHeader = stringToBase64(client_id + ':' + client_secret)
 
     headers = {
