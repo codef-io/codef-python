@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # UTF-8 encoding when using korean
-
+#
 import requests, json, base64
 import urllib
 
@@ -46,13 +46,13 @@ def base64ToString(b):
 # ========== Encode string data  ==========
 
 # token URL
-token_url = 'http://192.168.10.126:8888/oauth/token'
+token_url = 'https://toauth.codef.io/oauth/token'
 
 # CODEF 연결 아이디
 connected_id = ''
 
 # 기 발급된 토큰
-token ='eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzZXJ2aWNlX3R5cGUiOiIwIiwic2NvcGUiOlsicmVhZCJdLCJzZXJ2aWNlX25vIjoiMDAwMDAwMDQyMDAxIiwiZXhwIjoxNTYzMjUyNzA3LCJhdXRob3JpdGllcyI6WyJJTlNVUkFOQ0UiLCJQVUJMSUMiLCJCQU5LIiwiRVRDIiwiU1RPQ0siLCJDQVJEIl0sImp0aSI6IjRmYmZkMjE4LTVmZjAtNDVkMy1iOGMyLTk5NGQ0ZDBhYjQ1OCIsImNsaWVudF9pZCI6ImNvZGVmX21hc3RlciJ9.J1NftjvJ7Hrv6u8Qz0mI4TDfKy9Ozt4ptN5bz9ZLss-JTRsR289yikYBdtliDFSb2onE9rkIrxx-ljQYdbrXJ-U82i2v7cGqff-Ue7EjVyBYEX3JRENB54etuQMXE7qm4p7G01J61IIbemElWmSAD7Q8RQ7-0lEYZn9ZWVbdw4C4vgjXSN_nxOiiY0v6yKkP6GHyFnvzXNIcyH7U_fuRbuIJvzpvotw7icre7v6yplSye1skCVvHd5mBCKB2ypyOOKmrYMLCxZpJe3MPiV1aPhWyctsB6aQyJE8NV1JPfNLhIdjB8ApyITWuX4HYuYRzf_3ED4mEmpmlKupCG_A9Gw'
+token ='eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzZXJ2aWNlX3R5cGUiOiIwIiwic2NvcGUiOlsicmVhZCJdLCJzZXJ2aWNlX25vIjoiOTk5OTk5OTk5OSIsImV4cCI6MTU2MjczNjUyNywiYXV0aG9yaXRpZXMiOlsiSU5TVVJBTkNFIiwiUFVCTElDIiwiQkFOSyIsIkVUQyIsIlNUT0NLIiwiQ0FSRCJdLCJqdGkiOiIyODBhNjVkOS02NjU1LTQ5MzYtODEwNS05MjUyYTk4MGRjMDgiLCJjbGllbnRfaWQiOiJjb2RlZl9tYXN0ZXIifQ.eFCEgxcntsEkjFORAWGSi6949UMOuCxVsm2wnYlDXqrHWXXwG7-XfKugsBNone_qRRGeKD3iv6f_TEcVMWyTz8aS0fRbE514LVz6PnzKbruyPNDA5Pk3ym8up9h4Ba1ix__Bvpu_TB0Y7Fikk9YHWHacJy4F_WOjr8xFP-q2egh763_LqVUzRakGQoLOTukduZ5zH5lfSO1Z9yx2cnDkY4VSM9DTbycSZuA2oQkMVpXJc0slEyWLw7WNX5E-ff3fL6ePfJvu7by_4KmgmmJkOoKBWvJ00DwrwhAa1EZmjqGPYG6RE6wxSwsu3lYeiCX-jSGm_cbKdk7YDnYxm8FKzg'
 
 ##############################################################################
 ##                               계정 생성 Sample                             ##
@@ -67,7 +67,8 @@ token ='eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzZXJ2aWNlX3R5cGUiOiIwIiwic2NvcGU
 #   keyFile : 인증서 keyFile
 #
 ##############################################################################
-codef_account_create_url = 'http://192.168.10.126:10001/v1/account/create'
+print('=============================== 계정생성 ===============================')
+codef_account_create_url = 'https://tapi.codef.io/v1/account/create'
 codef_account_create_body = {
             'accountList':[
                 {
@@ -81,7 +82,18 @@ codef_account_create_body = {
 }
 
 response_account_create = http_sender(codef_account_create_url, token, codef_account_create_body)
-if response_account_create.status_code == 401:      # token error
+if response_account_create.status_code == 200:      # success
+    dict = json.loads(urllib.unquote_plus(response_account_create.text.encode('utf8')))
+    if 'data' in dict and str(dict['data']) != '{}':
+        data = dict['data']
+        if 'connectedId' in data:
+            connected_id = data['connectedId']
+            print('connected_id = ' + connected_id)
+            print('계정생성 정상처리')
+    else:
+        print(urllib.unquote_plus(response_account_create.text.encode('utf8')))
+        print('계정생성 오류')
+elif response_account_create.status_code == 401:      # token error
     dict = json.loads(response_account_create.text)
     # invalid_token
     print('error = ' + dict['error'])
@@ -98,21 +110,20 @@ if response_account_create.status_code == 401:      # token error
 
         # request codef_api
         response = http_sender(codef_account_create_url, token, codef_account_create_body)
-        dict = json.loads(urllib.unquote_plus(response.text.encode('utf8')))
-        connected_id = dict['data']['connectedId']
-        print('connected_id = ' + connected_id)
-        print('계정생성 정상처리')
-
-        # codef_api 응답 결과
-        print(response.status_code)
-        print(response.text)
+        if response.status_code == 200:      # success
+            dict = json.loads(urllib.unquote_plus(response.text.encode('utf8')))
+            if 'data' in dict and str(dict['data']) != '{}':
+                data = dict['data']
+                if 'connectedId' in data:
+                    connected_id = data['connectedId']
+                    print('connected_id = ' + connected_id)
+                    print('계정생성 정상처리')
+            else:
+                print(response.text)
     else:
         print('토큰발급 오류')
 else:
-    dict = json.loads(urllib.unquote_plus(response_account_create.text.encode('utf8')))
-    connected_id = dict['data']['connectedId']
-    print('connected_id = ' + connected_id)
-    print('계정생성 정상처리')
+    print('계정생성 오류')
 
 
 
@@ -130,7 +141,8 @@ else:
 #   keyFile : 인증서 keyFile
 #
 ##############################################################################
-codef_account_add_url = 'http://192.168.10.126:10001/v1/account/add'
+print('=============================== 계정추가 ===============================')
+codef_account_add_url = 'https://tapi.codef.io/v1/account/add'
 codef_account_add_body = {
             'connectedId': '8-cXc.6lk-ib4Whi5zClVt',    # connected_id
             'accountList':[
@@ -145,7 +157,9 @@ codef_account_add_body = {
 }
 
 response_account_add = http_sender(codef_account_add_url, token, codef_account_add_body)
-if response_account_create.status_code == 401:      # token error
+if response_account_create.status_code == 200:        # token error
+    print('계정추가 정상처리')
+elif response_account_create.status_code == 401:      # token error
     dict = json.loads(response_account_create.text)
     # invalid_token
     print('error = ' + dict['error'])
@@ -188,7 +202,8 @@ else:
 #   keyFile : 인증서 keyFile
 #
 ##############################################################################
-codef_account_update_url = 'http://192.168.10.126:10001/v1/account/update'
+print('=============================== 계정수정 ===============================')
+codef_account_update_url = 'https://tapi.codef.io/v1/account/update'
 codef_account_update_body = {
             'connectedId': '8-cXc.6lk-ib4Whi5zClVt',        # connected_id
             'accountList':[
@@ -202,9 +217,19 @@ codef_account_update_body = {
             ]
 }
 
-response_account_add = http_sender(codef_account_update_url, token, codef_account_update_body)
-if response_account_create.status_code == 401:      # token error
-    dict = json.loads(response_account_create.text)
+response_account_update = http_sender(codef_account_update_url, token, codef_account_update_body)
+if response_account_update.status_code == 200:      # success
+    dict = json.loads(urllib.unquote_plus(response_account_update.text.encode('utf8')))
+    if 'data' in dict and str(dict['data']) != '{}':
+        data = dict['data']
+        if 'connectedId' in data:
+            connected_id = data['connectedId']
+            print('connected_id = ' + connected_id)
+            print('계정수정 정상처리')
+    else:
+        print(response_account_update.text)
+elif response_account_update.status_code == 401:      # token error
+    dict = json.loads(response_account_update.text)
     # invalid_token
     print('error = ' + dict['error'])
     # Cannot convert access token to JSON
@@ -220,21 +245,20 @@ if response_account_create.status_code == 401:      # token error
 
         # request codef_api
         response = http_sender(codef_account_update_url, token, codef_account_update_body)
-        dict = json.loads(urllib.unquote_plus(response.text.encode('utf8')))
-        connected_id = dict['data']['connectedId']
-        print('connected_id = ' + connected_id)
-        print('계정수정 정상처리')
-
-        # codef_api 응답 결과
-        print(response.status_code)
-        print(response.text)
+        if response.status_code == 200:      # success
+            dict = json.loads(urllib.unquote_plus(response.text.encode('utf8')))
+            if 'data' in dict and str(dict['data']) != '{}':
+                data = dict['data']
+                if 'connectedId' in data:
+                    connected_id = data['connectedId']
+                    print('connected_id = ' + connected_id)
+                    print('계정수정 정상처리')
+            else:
+                print(response.text)
     else:
         print('토큰발급 오류')
 else:
-    dict = json.loads(urllib.unquote_plus(response_account_create.text.encode('utf8')))
-    connected_id = dict['data']['connectedId']
-    print('connected_id = ' + connected_id)
-    print('계정수정 정상처리')
+    print('계정수정 오류')
 
 
 
@@ -252,7 +276,8 @@ else:
 #   keyFile : 인증서 keyFile
 #
 ##############################################################################
-codef_account_delete_url = 'http://192.168.10.126:10001/v1/account/delete'
+print('=============================== 계정삭제 ===============================')
+codef_account_delete_url = 'https://tapi.codef.io/v1/account/delete'
 codef_account_delete_body = {
             'connectedId': '8-cXc.6lk-ib4Whi5zClVt',        # connected_id
             'accountList':[
@@ -266,9 +291,19 @@ codef_account_delete_body = {
             ]
 }
 
-response_account_add = http_sender(codef_account_delete_url, token, codef_account_delete_body)
-if response_account_create.status_code == 401:      # token error
-    dict = json.loads(response_account_create.text)
+response_account_delete = http_sender(codef_account_delete_url, token, codef_account_delete_body)
+if response_account_delete.status_code == 200:      # success
+    dict = json.loads(urllib.unquote_plus(response_account_delete.text.encode('utf8')))
+    if 'data' in dict and str(dict['data']) != '{}':
+        data = dict['data']
+        if 'connectedId' in data:
+            connected_id = data['connectedId']
+            print('connected_id = ' + connected_id)
+            print('계정삭제 정상처리')
+    else:
+        print(response_account_delete.text)
+elif response_account_delete.status_code == 401:      # token error
+    dict = json.loads(response_account_delete.text)
     # invalid_token
     print('error = ' + dict['error'])
     # Cannot convert access token to JSON
@@ -284,18 +319,17 @@ if response_account_create.status_code == 401:      # token error
 
         # request codef_api
         response = http_sender(codef_account_delete_url, token, codef_account_delete_body)
-        dict = json.loads(urllib.unquote_plus(response.text.encode('utf8')))
-        connected_id = dict['data']['connectedId']
-        print('connected_id = ' + connected_id)
-        print('계정삭제 정상처리')
-
-        # codef_api 응답 결과
-        print(response.status_code)
-        print(response.text)
+        if response.status_code == 200:      # success
+            dict = json.loads(urllib.unquote_plus(response.text.encode('utf8')))
+            if 'data' in dict and str(dict['data']) != '{}':
+                data = dict['data']
+                if 'connectedId' in data:
+                    connected_id = data['connectedId']
+                    print('connected_id = ' + connected_id)
+                    print('계정삭제 정상처리')
+            else:
+                print(response.text)
     else:
         print('토큰발급 오류')
 else:
-    dict = json.loads(urllib.unquote_plus(response_account_create.text.encode('utf8')))
-    connected_id = dict['data']['connectedId']
-    print('connected_id = ' + connected_id)
-    print('계정삭제 정상처리')
+    print('계정삭제 오류')
