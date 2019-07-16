@@ -159,7 +159,7 @@ codef_account_add_body = {
                     'countryCode':'KR',
                     'businessType':'BK',
                     'clientType':'P',
-                    'organization':'0004',
+                    'organization':'0020',
                     'loginType':'0',
                     'password':'1234',      # 인증서 비밀번호 입력
                     'derFile':'MIIF...',    # 인증서 인증서 DerFile
@@ -226,7 +226,7 @@ codef_account_update_body = {
                     'countryCode':'KR',
                     'businessType':'BK',
                     'clientType':'P',
-                    'organization':'0004',
+                    'organization':'0020',
                     'loginType':'0',
                     'password':'1234',      # 인증서 비밀번호 입력
                     'derFile':'MIIF...',    # 인증서 인증서 DerFile
@@ -287,6 +287,9 @@ else:
 #
 # connectedId : CODEF 연결아이디
 # accountList : 계정목록
+#   countryCode : 국가코드
+#   businessType : 비즈니스 구분
+#   clientType : 고객구분(P: 개인, B: 기업)
 #   organization : 기관코드
 #   loginType : 로그인타입 (0: 인증서, 1: ID/PW)
 #   password : 인증서 비밀번호
@@ -303,7 +306,7 @@ codef_account_delete_body = {
                     'countryCode':'KR',
                     'businessType':'BK',
                     'clientType':'P',
-                    'organization':'0004',
+                    'organization':'0020',
                     'loginType':'0',
                     'password':'1234',      # 인증서 비밀번호 입력
                     'derFile':'MIIF...',    # 인증서 인증서 DerFile
