@@ -49,7 +49,10 @@ codef_account_create_url = 'https://api.codef.io/account/create'
 codef_account_create_body = {
             'accountList':[                    # 계정목록
                 {
-                    'organization':'0003',     # 기관코드
+                    'countryCode':'KR',        # 국가코드
+                    'businessType':'BK',       # 비즈니스 구분
+                    'clientType':'P',          # 고객구분(P: 개인, B: 기업)
+                    'organization':'0004',     # 기관코드
                     'loginType':'0',           # 로그인타입 (0: 인증서, 1: ID/PW)
                     'password':'1234',         # 인증서 비밀번호             
                     'derFile':'인증서 DerFile',  # Base64String
@@ -64,7 +67,7 @@ dict = json.loads(urllib.unquote_plus(response.text.encode('utf8')))
 connected_id = dict['data']['connectedId']
 ```
 ```json
-{"result":{"code":"CF-00000","extraMessage":"","message":"정상"},"data":{"organizationList":[{"loginType":"0","organization":"0003"}],"connectedId":"1rZjLWFDQTAbWI-9weTq03"}}
+{"result":{"code":"CF-00000","extraMessage":"","message":"정상"},"data":{"organizationList":[{"clientType":"P","loginType":"0","organization":"0004","businessType":"BK"}],"connectedId":"dE-HSO244D-8Yf2nsMLunI"}}
 ```
 
 
@@ -79,9 +82,11 @@ codef_account_add_body = {
             'connectedId': '계정생성 시 발급받은 아이디',    # connected_id
             'accountList':[                    # 계정목록
                 {
-                    'organization':'0003',     # 기관코드
+                    'countryCode':'KR',        # 국가코드
+                    'businessType':'BK',       # 비즈니스 구분
+                    'clientType':'P',          # 고객구분(P: 개인, B: 기업)
+                    'organization':'0020',     # 기관코드
                     'loginType':'0',           # 로그인타입 (0: 인증서, 1: ID/PW)
-                    'password':'1234',         # 인증서 비밀번호             
                     'derFile':'인증서 DerFile',  # Base64String
                     'keyFile':'인증서 KeyFile'   # Base64String
                 }
@@ -92,7 +97,7 @@ codef_account_add_body = {
 response_account_add = http_sender(codef_account_add_url, token, codef_account_add_body)
 ```
 ```json
-{"result":{"code":"CF-94004","extraMessage":"","message":"이미 계정이 등록된 기관입니다. 기존 계정 먼저 삭제하세요."},"data":{"organizationList":[{"loginType":"0","organization":"0003"}],"connectedId":"1rZjLWFDQTAbWI-9weTq03"}}
+{"result":{"code":"CF-00000","extraMessage":"","message":"정상"},"data":{"successList":[{"clientType":"P","code":"CF-00000","countryCode":"KR","organization":"0020","businessType":"BK","message":"성공"}],"errorList":[],"connectedId":"9cbO3CatAhzbqR5JNOX5IZ"}}
 ```
 
 
@@ -107,7 +112,10 @@ codef_account_update_body = {
             'connectedId': '계정생성 시 발급받은 아이디',    # connected_id
             'accountList':[                    # 계정목록
                 {
-                    'organization':'0003',     # 기관코드
+                    'countryCode':'KR',        # 국가코드
+                    'businessType':'BK',       # 비즈니스 구분
+                    'clientType':'P',          # 고객구분(P: 개인, B: 기업)
+                    'organization':'0020',     # 기관코드
                     'loginType':'0',           # 로그인타입 (0: 인증서, 1: ID/PW)
                     'password':'1234',         # 인증서 비밀번호             
                     'derFile':'인증서 DerFile',  # Base64String
@@ -120,7 +128,7 @@ codef_account_update_body = {
 response_account_update = http_sender(codef_account_update_url, token, codef_account_update_body)
 ```
 ```json
-{"result":{"code":"CF-00000","extraMessage":"","message":"정상"},"data":{"organizationList":[{"loginType":"0","organization":"0003"}],"connectedId":"8-cXc.6lk-ib4Whi5zClVt"}}
+{"result":{"code":"CF-00000","extraMessage":"","message":"정상"},"data":{"successList":[{"clientType":"P","code":"CF-00000","countryCode":"KR","organization":"0020","businessType":"BK","message":"성공"}],"errorList":[],"connectedId":"9cbO3CatAhzbqR5JNOX5IZ"}}
 ```
 
 
@@ -135,7 +143,10 @@ codef_account_delete_body = {
             'connectedId': '계정생성 시 발급받은 아이디',    # connected_id
             'accountList':[                    # 계정목록
                 {
-                    'organization':'0003',     # 기관코드
+                    'countryCode':'KR',        # 국가코드
+                    'businessType':'BK',       # 비즈니스 구분
+                    'clientType':'P',          # 고객구분(P: 개인, B: 기업)
+                    'organization':'0020',     # 기관코드
                     'loginType':'0',           # 로그인타입 (0: 인증서, 1: ID/PW)
                     'password':'1234',         # 인증서 비밀번호             
                     'derFile':'인증서 DerFile',  # Base64String
@@ -148,7 +159,7 @@ codef_account_delete_body = {
 response_account_delete = http_sender(codef_account_delete_url, token, codef_account_delete_body)
 ```
 ```json
-{"result":{"code":"CF-00000","extraMessage":"","message":"정상"},"data":{"organizationList":[{"loginType":"0","organization":"0003"}],"connectedId":"8-cXc.6lk-ib4Whi5zClVt"}}
+{"result":{"code":"CF-00000","extraMessage":"","message":"정상"},"data":{"organizationList":[{"clientType":"P","loginType":"0","countryCode":"KR","organization":"0020","businessType":"BK"}],"connectedId":"9cbO3CatAhzbqR5JNOX5IZ"}}
 ```
 
 
