@@ -24,7 +24,7 @@ CODEF API를 사용하기 위해서는 'access_token' 발행이 선행되어야 
 
 ```python
 token_url = 'https://api.codef.io/oauth/token'
-response_oauth = request_token(token_url, "codef_master", "codef_master_secret");
+response_oauth = request_token(token_url, 'CODEF로부터 발급받은 클라이언트 아이디', 'CODEF로부터 발급받은 시크릿 키');
     if response_oauth.status_code == 200:
         dict = json.loads(response_oauth.text)
         # reissue_token
@@ -197,7 +197,7 @@ if response_codef_api.status_code == 401:
     print('error_description = ' + dict['error_description'])
 
     # reissue token
-    response_oauth = request_token(token_url, "codef_master", "codef_master_secret");
+    response_oauth = request_token(token_url, 'CODEF로부터 발급받은 클라이언트 아이디', 'CODEF로부터 발급받은 시크릿 키');
     if response_oauth.status_code == 200:
         dict = json.loads(response_oauth.text)
         # reissue_token
