@@ -4,6 +4,9 @@
 import requests, json, base64
 import urllib
 
+from Crypto.PublicKey import RSA
+from Crypto.Cipher import PKCS1_v1_5 as Cipher_PKCS1_v1_5
+
 # ========== HTTP 기본 함수 ==========
 
 def http_sender(url, token, body):
@@ -11,8 +14,9 @@ def http_sender(url, token, body):
         'Authorization': 'Bearer ' + token
         }
 
-    response = requests.post(url, headers = headers, data = json.dumps(body))
+    response = requests.post(url, headers = headers, data = urllib.quote(str(json.dumps(body))))
 
+    # print('//////////////// = ' + urllib.urlencode(json.dumps(body)))
     print('response.status_code = ' + str(response.status_code))
     print('response.text = ' + urllib.unquote_plus(response.text.encode('utf8')))
 
@@ -37,6 +41,19 @@ def request_token(url, client_id, client_secret):
     return response
 # ========== Toekn 재발급  ==========
 
+# ========== Toekn 재발급  ==========
+def publicEncRSA(publicKey, data):
+    keyDER = base64.b64decode(pubKey)
+    keyPub = RSA.importKey(keyDER)
+    cipher = Cipher_PKCS1_v1_5.new(keyPub)
+    cipher_text = cipher.encrypt(data.encode())
+
+    encryptedData = base64.b64encode(cipher_text)
+    print('encryptedData = ' + encryptedData)
+
+    return encryptedData
+# ========== Toekn 재발급  ==========
+
 # ========== Encode string data  ==========
 def stringToBase64(s):
     return base64.b64encode(s.encode('utf-8'))
@@ -54,6 +71,7 @@ connected_id = ''
 # 기 발급된 토큰
 token ='eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzZXJ2aWNlX3R5cGUiOiIwIiwic2NvcGUiOlsicmVhZCJdLCJzZXJ2aWNlX25vIjoiOTk5OTk5OTk5OSIsImV4cCI6MTU2MjczNjUyNywiYXV0aG9yaXRpZXMiOlsiSU5TVVJBTkNFIiwiUFVCTElDIiwiQkFOSyIsIkVUQyIsIlNUT0NLIiwiQ0FSRCJdLCJqdGkiOiIyODBhNjVkOS02NjU1LTQ5MzYtODEwNS05MjUyYTk4MGRjMDgiLCJjbGllbnRfaWQiOiJjb2RlZl9tYXN0ZXIifQ.eFCEgxcntsEkjFORAWGSi6949UMOuCxVsm2wnYlDXqrHWXXwG7-XfKugsBNone_qRRGeKD3iv6f_TEcVMWyTz8aS0fRbE514LVz6PnzKbruyPNDA5Pk3ym8up9h4Ba1ix__Bvpu_TB0Y7Fikk9YHWHacJy4F_WOjr8xFP-q2egh763_LqVUzRakGQoLOTukduZ5zH5lfSO1Z9yx2cnDkY4VSM9DTbycSZuA2oQkMVpXJc0slEyWLw7WNX5E-ff3fL6ePfJvu7by_4KmgmmJkOoKBWvJ00DwrwhAa1EZmjqGPYG6RE6wxSwsu3lYeiCX-jSGm_cbKdk7YDnYxm8FKzg'
 
+pubKey = 'MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAqfaFcUivfb/Y2/miAccmnARokQ3FJZAyJA1+25CNlHTd3wjIJugIdPjUxepzX+6DKFfR30jeL3uziz6k9ECMJV/UfZ+ev35EDmkjQFBgdY/teb2qPRA5kGwHIRzbMquQfQZ8Dh5v3e/viQKeERpn/ajblzblIgZ+5Fe7DQzzlhqJ0DWy5koGSQ2gTQynOqlbaVLSsbQsDPuE6cZOa+AbLbOAetTf2NtaMWMC2LUm6LDbN5OEdDNqQ7BE2ngUFiapr+ztQvlaMj/8NCDucEMHSVMQrhyTeuMVSPotq1VcUN7VTvLj7+P3qHEjRpmg5/q505Xpl8svoQ7uJcbM222bOwIDAQAB';
 ##############################################################################
 ##                               계정 생성 Sample                             ##
 ##############################################################################
@@ -80,9 +98,9 @@ codef_account_create_body = {
                     'clientType':'P',
                     'organization':'0004',
                     'loginType':'0',
-                    'password':'1234',      # 인증서 비밀번호 입력
-                    'derFile':'MIIF...',    # 인증서 인증서 DerFile
-                    'keyFile':'MIIF...'     # 인증서 인증서 KeyFile
+                    'password':publicEncRSA(pubKey, '1234'),    # 인증서 비밀번호 입력
+                    'derFile':'MIIF...',                        # 인증서 인증서 DerFile
+                    'keyFile':'MIIF...'                         # 인증서 인증서 KeyFile
                 }
             ]
 }
@@ -161,9 +179,9 @@ codef_account_add_body = {
                     'clientType':'P',
                     'organization':'0020',
                     'loginType':'0',
-                    'password':'1234',      # 인증서 비밀번호 입력
-                    'derFile':'MIIF...',    # 인증서 인증서 DerFile
-                    'keyFile':'MIIF...'     # 인증서 인증서 KeyFile
+                    'password':publicEncRSA(pubKey, '1234'),    # 인증서 비밀번호 입력
+                    'derFile':'MIIF...',                        # 인증서 인증서 DerFile
+                    'keyFile':'MIIF...'                         # 인증서 인증서 KeyFile
                 }
             ]
 }
@@ -228,9 +246,9 @@ codef_account_update_body = {
                     'clientType':'P',
                     'organization':'0020',
                     'loginType':'0',
-                    'password':'1234',      # 인증서 비밀번호 입력
-                    'derFile':'MIIF...',    # 인증서 인증서 DerFile
-                    'keyFile':'MIIF...'     # 인증서 인증서 KeyFile
+                    'password':publicEncRSA(pubKey, '1234'),    # 인증서 비밀번호 입력
+                    'derFile':'MIIF...',                        # 인증서 인증서 DerFile
+                    'keyFile':'MIIF...'                         # 인증서 인증서 KeyFile
                 }
             ]
 }
@@ -308,9 +326,9 @@ codef_account_delete_body = {
                     'clientType':'P',
                     'organization':'0020',
                     'loginType':'0',
-                    'password':'1234',      # 인증서 비밀번호 입력
-                    'derFile':'MIIF...',    # 인증서 인증서 DerFile
-                    'keyFile':'MIIF...'     # 인증서 인증서 KeyFile
+                    'password':publicEncRSA(pubKey, '1234'),    # 인증서 비밀번호 입력
+                    'derFile':'MIIF...',                        # 인증서 인증서 DerFile
+                    'keyFile':'MIIF...'                         # 인증서 인증서 KeyFile
                 }
             ]
 }
