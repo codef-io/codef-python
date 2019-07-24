@@ -1,6 +1,11 @@
 # -*- coding: utf-8 -*-
 # UTF-8 encoding when using korean
-#
+
+######################################
+##      계정 등록
+######################################
+
+
 import requests, json, base64
 import urllib
 
@@ -69,9 +74,9 @@ token_url = 'https://toauth.codef.io/oauth/token'
 connected_id = ''
 
 # 기 발급된 토큰
-token ='eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzZXJ2aWNlX3R5cGUiOiIwIiwic2NvcGUiOlsicmVhZCJdLCJzZXJ2aWNlX25vIjoiOTk5OTk5OTk5OSIsImV4cCI6MTU2MjczNjUyNywiYXV0aG9yaXRpZXMiOlsiSU5TVVJBTkNFIiwiUFVCTElDIiwiQkFOSyIsIkVUQyIsIlNUT0NLIiwiQ0FSRCJdLCJqdGkiOiIyODBhNjVkOS02NjU1LTQ5MzYtODEwNS05MjUyYTk4MGRjMDgiLCJjbGllbnRfaWQiOiJjb2RlZl9tYXN0ZXIifQ.eFCEgxcntsEkjFORAWGSi6949UMOuCxVsm2wnYlDXqrHWXXwG7-XfKugsBNone_qRRGeKD3iv6f_TEcVMWyTz8aS0fRbE514LVz6PnzKbruyPNDA5Pk3ym8up9h4Ba1ix__Bvpu_TB0Y7Fikk9YHWHacJy4F_WOjr8xFP-q2egh763_LqVUzRakGQoLOTukduZ5zH5lfSO1Z9yx2cnDkY4VSM9DTbycSZuA2oQkMVpXJc0slEyWLw7WNX5E-ff3fL6ePfJvu7by_4KmgmmJkOoKBWvJ00DwrwhAa1EZmjqGPYG6RE6wxSwsu3lYeiCX-jSGm_cbKdk7YDnYxm8FKzg'
+token =''
 
-pubKey = 'CODEF로부터 발급받은 publicKey';
+pubKey = 'CODEF로부터 발급받은 publicKey'
 ##############################################################################
 ##                               계정 생성 Sample                             ##
 ##############################################################################
@@ -125,7 +130,7 @@ elif response_account_create.status_code == 401:      # token error
     print('error_description = ' + dict['error_description'])
 
     # reissue token
-    response_oauth = request_token(token_url, 'CODEF로부터 발급받은 클라이언트 아이디', 'CODEF로부터 발급받은 시크릿 키');
+    response_oauth = request_token(token_url, 'CODEF로부터 발급받은 클라이언트 아이디', 'CODEF로부터 발급받은 시크릿 키')
     if response_oauth.status_code == 200:
         dict = json.loads(response_oauth.text)
         # reissue_token
