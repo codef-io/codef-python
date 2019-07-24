@@ -71,7 +71,7 @@ connected_id = ''
 # 기 발급된 토큰
 token ='eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzZXJ2aWNlX3R5cGUiOiIwIiwic2NvcGUiOlsicmVhZCJdLCJzZXJ2aWNlX25vIjoiOTk5OTk5OTk5OSIsImV4cCI6MTU2MjczNjUyNywiYXV0aG9yaXRpZXMiOlsiSU5TVVJBTkNFIiwiUFVCTElDIiwiQkFOSyIsIkVUQyIsIlNUT0NLIiwiQ0FSRCJdLCJqdGkiOiIyODBhNjVkOS02NjU1LTQ5MzYtODEwNS05MjUyYTk4MGRjMDgiLCJjbGllbnRfaWQiOiJjb2RlZl9tYXN0ZXIifQ.eFCEgxcntsEkjFORAWGSi6949UMOuCxVsm2wnYlDXqrHWXXwG7-XfKugsBNone_qRRGeKD3iv6f_TEcVMWyTz8aS0fRbE514LVz6PnzKbruyPNDA5Pk3ym8up9h4Ba1ix__Bvpu_TB0Y7Fikk9YHWHacJy4F_WOjr8xFP-q2egh763_LqVUzRakGQoLOTukduZ5zH5lfSO1Z9yx2cnDkY4VSM9DTbycSZuA2oQkMVpXJc0slEyWLw7WNX5E-ff3fL6ePfJvu7by_4KmgmmJkOoKBWvJ00DwrwhAa1EZmjqGPYG6RE6wxSwsu3lYeiCX-jSGm_cbKdk7YDnYxm8FKzg'
 
-pubKey = 'MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAqfaFcUivfb/Y2/miAccmnARokQ3FJZAyJA1+25CNlHTd3wjIJugIdPjUxepzX+6DKFfR30jeL3uziz6k9ECMJV/UfZ+ev35EDmkjQFBgdY/teb2qPRA5kGwHIRzbMquQfQZ8Dh5v3e/viQKeERpn/ajblzblIgZ+5Fe7DQzzlhqJ0DWy5koGSQ2gTQynOqlbaVLSsbQsDPuE6cZOa+AbLbOAetTf2NtaMWMC2LUm6LDbN5OEdDNqQ7BE2ngUFiapr+ztQvlaMj/8NCDucEMHSVMQrhyTeuMVSPotq1VcUN7VTvLj7+P3qHEjRpmg5/q505Xpl8svoQ7uJcbM222bOwIDAQAB';
+pubKey = 'CODEF로부터 발급받은 publicKey';
 ##############################################################################
 ##                               계정 생성 Sample                             ##
 ##############################################################################
