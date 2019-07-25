@@ -2,7 +2,7 @@
 # UTF-8 encoding when using korean
 
 ######################################
-##      은행 법인 펀드 거래내역
+##      카드 법인 청구내역 조회
 ######################################
 
 
@@ -54,21 +54,20 @@ def base64ToString(b):
 codef_url = 'https://tapi.codef.io'
 token_url = 'https://toauth.codef.io/oauth/token'
 
-# 은행 법인 펀드 거래내역
-account_list_path = '/v1/kr/bank/b/fund/transaction-list'
+# 카드 법인 청구내역 조회
+account_list_path = '/v1/kr/card/b/account/billing-list'
 
 # 기 발급된 토큰
-token ='eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzZXJ2aWNlX3R5cGUiOiIwIiwic2NvcGUiOlsicmVhZCJdLCJzZXJ2aWNlX25vIjoiOTk5OTk5OTk5OSIsImV4cCI6MTU2MjczNjUyNywiYXV0aG9yaXRpZXMiOlsiSU5TVVJBTkNFIiwiUFVCTElDIiwiQkFOSyIsIkVUQyIsIlNUT0NLIiwiQ0FSRCJdLCJqdGkiOiIyODBhNjVkOS02NjU1LTQ5MzYtODEwNS05MjUyYTk4MGRjMDgiLCJjbGllbnRfaWQiOiJjb2RlZl9tYXN0ZXIifQ.eFCEgxcntsEkjFORAWGSi6949UMOuCxVsm2wnYlDXqrHWXXwG7-XfKugsBNone_qRRGeKD3iv6f_TEcVMWyTz8aS0fRbE514LVz6PnzKbruyPNDA5Pk3ym8up9h4Ba1ix__Bvpu_TB0Y7Fikk9YHWHacJy4F_WOjr8xFP-q2egh763_LqVUzRakGQoLOTukduZ5zH5lfSO1Z9yx2cnDkY4VSM9DTbycSZuA2oQkMVpXJc0slEyWLw7WNX5E-ff3fL6ePfJvu7by_4KmgmmJkOoKBWvJ00DwrwhAa1EZmjqGPYG6RE6wxSwsu3lYeiCX-jSGm_cbKdk7YDnYxm8FKzg'
+token =''
 
 # BodyData
 body = {
-    'connectedId':'9LUm.uhVQbzaangazwI0tr',     // 엔드유저의 은행/카드사 계정 등록 후 발급받은 커넥티드아이디 예시
+    'connectedId':'9LUm.uhVQbzaangazwI0tr',     # 엔드유저의 은행/카드사 계정 등록 후 발급받은 커넥티드아이디 예시
     'organization':'기관코드',
-    'account':'계좌번호',
+    'identity':'사업자번호/주민번호',
     'startDate':'조회시작일자',
-    'endDate':'조회종료일자',
-    'orderBy':'정렬기준',
-    'inquiryType':'조회구분'
+    'inquiryType':'조회구분',
+    'cardNo':'카드번호',
 }
 
 # CODEF API 요청
