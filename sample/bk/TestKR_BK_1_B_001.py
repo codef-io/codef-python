@@ -62,7 +62,7 @@ token =''
 
 # BodyData
 body = {
-    'connected_id':'9LUm.uhVQbzaangazwI0tr',
+    'connectedId':'9LUm.uhVQbzaangazwI0tr',
     'organization':'0011'
 }
 
