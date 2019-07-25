@@ -2,7 +2,7 @@
 # UTF-8 encoding when using korean
 
 ######################################
-##      은행 법인 보유계좌
+##      은행 개인 보유계좌
 ######################################
 
 
@@ -54,8 +54,8 @@ def base64ToString(b):
 codef_url = 'https://tapi.codef.io'
 token_url = 'https://toauth.codef.io/oauth/token'
 
-# 은행 법인 보유계좌
-account_list_path = '/v1/kr/bank/b/account/account-list'
+# 은행 개인 보유계좌
+account_list_path = '/v1/kr/bank/p/account/account-list'
 
 # 기 발급된 토큰
 token =''

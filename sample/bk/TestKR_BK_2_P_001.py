@@ -2,7 +2,7 @@
 # UTF-8 encoding when using korean
 
 ######################################
-##      은행 법인 보유계좌
+##      저축 은행 개인 보유계좌
 ######################################
 
 
@@ -54,8 +54,8 @@ def base64ToString(b):
 codef_url = 'https://tapi.codef.io'
 token_url = 'https://toauth.codef.io/oauth/token'
 
-# 은행 법인 보유계좌
-account_list_path = '/v1/kr/bank/b/account/account-list'
+# 저축 은행 개인 보유계좌
+account_list_path = '/v1/kr/bank2/p/account/account-list'
 
 # 기 발급된 토큰
 token =''
@@ -64,6 +64,7 @@ token =''
 body = {
     'connectedId':'9LUm.uhVQbzaangazwI0tr',     // 엔드유저의 은행/카드사 계정 등록 후 발급받은 커넥티드아이디 예시
     'organization':'기관코드'
+    'bankName':'<저축은행 중앙회 모듈 필수: [서브도메인 명]>'
 }
 
 # CODEF API 요청
