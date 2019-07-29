@@ -69,15 +69,15 @@ codef_connected_id_list_body = {
     'pageNo':'5'            # 페이지 번호(생략 가능) 생략시 1페이지 값(0) 자동 설정
 }
 
-response_account_create = http_sender(codef_connected_id_list_url, token, codef_connected_id_list_body)
-if response_account_create.status_code == 200:      # success
-    dict = json.loads(urllib.unquote_plus(response_account_create.text.encode('utf8')))
+response_connected_id_list = http_sender(codef_connected_id_list_url, token, codef_connected_id_list_body)
+if response_connected_id_list.status_code == 200:      # success
+    dict = json.loads(urllib.unquote_plus(response_connected_id_list.text.encode('utf8')))
     if 'data' in dict and str(dict['data']) != '{}':
         print('조회 정상 처리')
     else:
         print('조회 오류')
-elif response_account_create.status_code == 401:      # token error
-    dict = json.loads(response_account_create.text)
+elif response_connected_id_list.status_code == 401:      # token error
+    dict = json.loads(response_connected_id_list.text)
     # invalid_token
     print('error = ' + dict['error'])
     # Cannot convert access token to JSON

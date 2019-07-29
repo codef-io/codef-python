@@ -72,15 +72,15 @@ codef_account_list_body = {
     'connectedId':connected_id          # 엔드유저의 은행/카드사 계정 등록 후 발급받은 커넥티드아이디 예시
 }
 
-response_account_create = http_sender(codef_account_list_url, token, codef_account_list_body)
-if response_account_create.status_code == 200:      # success
-    dict = json.loads(urllib.unquote_plus(response_account_create.text.encode('utf8')))
+response_account_list = http_sender(codef_account_list_url, token, codef_account_list_body)
+if response_account_list.status_code == 200:      # success
+    dict = json.loads(urllib.unquote_plus(response_account_list.text.encode('utf8')))
     if 'data' in dict and str(dict['data']) != '{}':
         print('조회 정상 처리')
     else:
         print('조회 오류')
-elif response_account_create.status_code == 401:      # token error
-    dict = json.loads(response_account_create.text)
+elif response_account_list.status_code == 401:      # token error
+    dict = json.loads(response_account_list.text)
     # invalid_token
     print('error = ' + dict['error'])
     # Cannot convert access token to JSON
