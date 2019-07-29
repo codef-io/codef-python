@@ -46,7 +46,7 @@ def request_token(url, client_id, client_secret):
     return response
 # ========== Toekn 재발급  ==========
 
-# ========== public Encrypt  ==========
+# ========== RSA Encrypt  ==========
 def publicEncRSA(publicKey, data):
     keyDER = base64.b64decode(pubKey)
     keyPub = RSA.importKey(keyDER)
@@ -57,7 +57,7 @@ def publicEncRSA(publicKey, data):
     print('encryptedData = ' + encryptedData)
 
     return encryptedData
-# ========== public Encrypt  ==========
+# ========== RSA Encrypt  ==========
 
 # ========== Encode string data  ==========
 def stringToBase64(s):
