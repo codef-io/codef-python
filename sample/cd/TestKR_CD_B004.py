@@ -16,7 +16,7 @@ def http_sender(url, token, body):
         'Authorization': 'Bearer ' + token
         }
 
-    response = requests.post(url, headers = headers, data = json.dumps(body))
+    response = requests.post(url, headers = headers, data = urllib.quote(json.dumps(body)))
 
     print('response.status_code = ' + str(response.status_code))
     print('response.text = ' + urllib.unquote_plus(response.text.encode('utf8')))
