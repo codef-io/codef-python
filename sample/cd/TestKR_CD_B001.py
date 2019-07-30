@@ -62,8 +62,8 @@ token =''
 
 # BodyData
 body = {
-    'connectedId':'9LUm.uhVQbzaangazwI0tr',     # 엔드유저의 은행/카드사 계정 등록 후 발급받은 커넥티드아이디 예시
-    'organization':'기관코드',
+    'connectedId':'엔드유저의 은행/카드사 계정 등록 후 발급받은 커넥티드아이디',
+    'organization':'기관코드'
     'identity':'사업자번호/주민번호'
 }
 

@@ -62,7 +62,7 @@ token =''
 
 # BodyData
 body = {
-    'connectedId':'9LUm.uhVQbzaangazwI0tr',     # 엔드유저의 은행/카드사 계정 등록 후 발급받은 커넥티드아이디 예시
+    'connectedId':'엔드유저의 은행/카드사 계정 등록 후 발급받은 커넥티드아이디',
     'organization':'기관코드',
     'birthDate':'생년월일',
     'startDate':'조회시작일자',
@@ -73,7 +73,7 @@ body = {
     'cardName':'카드명칭',
     'duplicateCardSelect':'중복카드선택',
     'duplicateCardIdx':'중복카드일련번호',
-    'memberStoreInfoType':'가맹점정보포함여부',
+    'memberStoreInfoType':'가맹점정보포함여부'
 }
 
 # CODEF API 요청
