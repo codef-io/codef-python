@@ -46,8 +46,8 @@ else:
 
 ### 계정 생성
 
-CODEF API를 사용하기 위해서는 엔드유저가 사용하는 대상기관의 인증수단 등록이 필요하며, 이를 통해 사용자마다 유니크한 'connected_id'를 발급받을 수 있습니다.
-이후에는 별도의 인증수단 전송 없이 'connected_id'를 통해서 대상기관의 데이터를 연동할 수 있습니다. 'connected_id' 발급은 최초 계정 생성 요청시에만 가능하며 이후에 엔드유저의 인증수단 관리는 계정 추가, 계정 수정, 계정 삭제 거래를 이용해야 합니다.
+CODEF API를 사용하기 위해서는 엔드유저가 사용하는 대상기관의 인증수단 등록이 필요하며, 이를 통해 사용자마다 유니크한 'connectedId'를 발급받을 수 있습니다.
+이후에는 별도의 인증수단 전송 없이 'connectedId'를 통해서 대상기관의 데이터를 연동할 수 있습니다. 'connectedId' 발급은 최초 계정 생성 요청시에만 가능하며 이후에 엔드유저의 인증수단 관리는 계정 추가, 계정 수정, 계정 삭제 거래를 이용해야 합니다.
 
 * 은행/카드 업무의 경우 동일한 기관에 등록 가능한 인증수단은 개인 고객/기업 고객 각각 1건입니다.
 * API서버를 향한 모든 요청 파라미터는 URLEncoder를 통해 UTF-8로 인코딩되어야 합니다. (RegisterAccount.py 참조)
@@ -116,8 +116,8 @@ response_account_create = http_sender(codef_account_create_url, token, codef_acc
 
 ### 계정 추가
 
-계정 생성을 통해 발급받은 'connected_id'에 추가 기관의 인증수단을 등록할 수 있습니다. 추가 등록한 기관을 포함하여 이후에는 별도의 인증수단 전송없이
-'connected_id'를 통해서 대상기관의 데이터를 연동할 수 있습니다.
+계정 생성을 통해 발급받은 'connectedId'에 추가 기관의 인증수단을 등록할 수 있습니다. 추가 등록한 기관을 포함하여 이후에는 별도의 인증수단 전송없이
+'connectedId'를 통해서 대상기관의 데이터를 연동할 수 있습니다.
 
 * 은행/카드 업무의 경우 동일한 기관에 등록 가능한 인증수단은 개인 고객/기업 고객 각각 1건입니다.
 * API서버를 향한 모든 요청 파라미터는 URLEncoder를 통해 UTF-8로 인코딩되어야 합니다. (RegisterAccount.py 참조)
@@ -125,7 +125,7 @@ response_account_create = http_sender(codef_account_create_url, token, codef_acc
 ```python
 codef_account_add_url = 'https://api.codef.io/account/add'
 codef_account_add_body = {
-            'connectedId': '엔드유저의 은행/카드사 계정 등록 후 발급받은 커넥티드아이디 입력',    # connected_id
+            'connectedId': '엔드유저의 은행/카드사 계정 등록 후 발급받은 커넥티드아이디 입력',    # connectedId
             'accountList':[                  # 계정목록
               {
                   'countryCode':'KR',        # 국가코드
@@ -169,15 +169,15 @@ response_account_add = http_sender(codef_account_add_url, token, codef_account_a
 
 ### 계정 수정
 
-계정 생성을 통해 발급받은 'connected_id'에 등록된 기관의 인증수단을 변경할 수 있습니다. 변경 요청한 기관의 인증 수단은 호출 즉시 변경되며, 이 후
-'connected_id'를 통해서 대상기관의 데이터를 연동할 수 있습니다.
+계정 생성을 통해 발급받은 'connectedId'에 등록된 기관의 인증수단을 변경할 수 있습니다. 변경 요청한 기관의 인증 수단은 호출 즉시 변경되며, 이 후
+'connectedId'를 통해서 대상기관의 데이터를 연동할 수 있습니다.
 
 * API서버를 향한 모든 요청 파라미터는 URLEncoder를 통해 UTF-8로 인코딩되어야 합니다. (RegisterAccount.py 참조)
 
 ```python
 codef_account_update_url = 'https://api.codef.io/account/update'
 codef_account_update_body = {
-            'connectedId': '계정생성 시 발급받은 아이디',    # connected_id
+            'connectedId': '계정생성 시 발급받은 아이디',    # connectedId
             'accountList':[                    # 계정목록
                 {
                     'countryCode':'KR',        # 국가코드
@@ -221,7 +221,7 @@ response_account_update = http_sender(codef_account_update_url, token, codef_acc
 
 ### 계정 삭제
 
-엔드유저가 등록된 계정의 삭제를 요청 시 'connected_id'에 등록된 기관의 인증수단을 즉시 삭제할 수 있습니다. 요청한 기관의 인증 수단은 호출 즉시 삭제되며,
+엔드유저가 등록된 계정의 삭제를 요청 시 'connectedId'에 등록된 기관의 인증수단을 즉시 삭제할 수 있습니다. 요청한 기관의 인증 수단은 호출 즉시 삭제되며,
 해당 데이터는 복구할 수 없습니다.
 
 * API서버를 향한 모든 요청 파라미터는 URLEncoder를 통해 UTF-8로 인코딩되어야 합니다. (RegisterAccount.py 참조)
@@ -229,7 +229,7 @@ response_account_update = http_sender(codef_account_update_url, token, codef_acc
 ```python
 codef_account_delete_url = 'https://api.codef.io/account/delete'
 codef_account_delete_body = {
-            'connectedId': '계정생성 시 발급받은 아이디',    # connected_id
+            'connectedId': '계정생성 시 발급받은 아이디',    # connectedId
             'accountList':[                    # 계정목록
                 {
                     'countryCode':'KR',        # 국가코드
@@ -274,7 +274,7 @@ response_account_delete = http_sender(codef_account_delete_url, token, codef_acc
 ```python
 codef_account_list_url = 'https://api.codef.io/v1/account/list'
 codef_account_list_body = {
-    'connectedId':connected_id          # 엔드유저의 은행/카드사 계정 등록 후 발급받은 커넥티드아이디 예시
+    'connectedId':connectedId          # 엔드유저의 은행/카드사 계정 등록 후 발급받은 커넥티드아이디 예시
 }
 
 # CODEF API 호출
@@ -356,13 +356,13 @@ CODEF로부터 발급된 'connectedId'의 목록에 대한 조회를 요청할 �
 * API서버를 향한 모든 요청 파라미터는 URLEncoder를 통해 UTF-8로 인코딩되어야 합니다. (ConnectedIdList.py 참조)
 
 ```python
-codef_connected_id_list_url = 'https://api.codef.io/v1/account/connectedId-list'
-codef_connected_id_list_body = {
+codef_connectedId_list_url = 'https://api.codef.io/v1/account/connectedId-list'
+codef_connectedId_list_body = {
     'pageNo':'5'            # 페이지 번호(생략 가능) 생략시 1페이지 값(0) 자동 설정
 }
 
 # CODEF API 호출
-response_connected_id_list = http_sender(codef_connected_id_list_url, token, codef_connected_id_list_body)
+response_connectedId_list = http_sender(codef_connectedId_list_url, token, codef_connectedId_list_body)
 ```
 ```json
 {
@@ -383,7 +383,7 @@ response_connected_id_list = http_sender(codef_connected_id_list_url, token, cod
 
 ### CODEF API(법인 보유계좌조회)
 
-발급받은 'connected_id' 를 통해 등록된 기관의 보유계좌를 조회할 수 있습니다.
+발급받은 'connectedId' 를 통해 등록된 기관의 보유계좌를 조회할 수 있습니다.
 
 * API서버를 향한 모든 요청 파라미터는 URLEncoder를 통해 UTF-8로 인코딩되어야 합니다. (TestKR_BK_1_B_001.py 참조)
 
@@ -401,7 +401,7 @@ token =''     #access_token
 
 # BodyData
 body = {
-    'connected_id':'9LUm.uhVQbzaangazwI0tr',
+    'connectedId':'9LUm.uhVQbzaangazwI0tr',
     'organization':'0011'
 }
 
