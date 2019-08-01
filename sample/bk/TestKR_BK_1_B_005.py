@@ -12,14 +12,15 @@ import urllib
 # ========== HTTP 기본 함수 ==========
 
 def http_sender(url, token, body):
-    headers = {'Content-Type': 'application/json',
+    headers = {
+        'Content-Type': 'application/json',
         'Authorization': 'Bearer ' + token
-        }
+    }
 
-    response = requests.post(url, headers = headers, data = urllib.quote(json.dumps(body)))
+    response = requests.post(url, headers=headers, data=urllib.parse.quote(json.dumps(body)))
 
     print('response.status_code = ' + str(response.status_code))
-    print('response.text = ' + urllib.unquote_plus(response.text.encode('utf8')))
+    print('response.text = ' + urllib.parse.unquote_plus(response.text, encoding='utf-8'))
 
     return response
 # ========== HTTP 함수  ==========
@@ -31,13 +32,13 @@ def request_token(url, client_id, client_secret):
     headers = {
         'Acceppt': 'application/json',
         'Content-Type': 'application/x-www-form-urlencoded',
-        'Authorization': 'Basic ' + authHeader
+        'Authorization': 'Basic ' + authHeader.decode('utf-8')
         }
 
-    response = requests.post(url, headers = headers, data = 'grant_type=client_credentials&scope=read')
+    response = requests.post(url, headers=headers, data='grant_type=client_credentials&scope=read')
 
     print('response.status_code = ' + str(response.status_code))
-    print('response.text = ' + urllib.unquote_plus(response.text.encode('utf8')))
+    print('response.text = ' + urllib.parse.unquote_plus(response.text, encoding='utf-8'))
 
     return response
 # ========== Toekn 재발급  ==========
@@ -62,7 +63,7 @@ token =''
 
 # BodyData
 body = {
-    'connectedId':'9LUm.uhVQbzaangazwI0tr',     // 엔드유저의 은행/카드사 계정 등록 후 발급받은 커넥티드아이디 예시
+    'connectedId':'9LUm.uhVQbzaangazwI0tr',     # 엔드유저의 은행/카드사 계정 등록 후 발급받은 커넥티드아이디 예시
     'organization':'기관코드',
     'account':'계좌번호',
     'startDate':'조회시작일자',
