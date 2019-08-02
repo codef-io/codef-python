@@ -2,7 +2,7 @@
 # UTF-8 encoding when using korean
 
 ######################################
-##      은행 법인 외화 거래내역
+##      카드 개인 보유내역 조회
 ######################################
 
 
@@ -51,29 +51,27 @@ def base64ToString(b):
     return base64.b64decode(b).decode('utf-8')
 # ========== Encode string data  ==========
 
-# CodefURL
-codef_url = 'https://tapi.codef.io'
-token_url = 'https://toauth.codef.io/oauth/token'
+# API서버 샌드박스 도메인
+CODEF_URL = 'https://tsandbox.codef.io';
+TOKEN_URL = 'https://toauth.codef.io/oauth/token';
+SANDBOX_CLIENT_ID 	= 'ef27cfaa-10c1-4470-adac-60ba476273f9';        # CODEF 샌드박스 클라이언트 아이디
+SANDBOX_SECERET_KEY 	= '83160c33-9045-4915-86d8-809473cdf5c3';    # CODEF 샌드박스 클라이언트 시크릿
 
-# 은행 법인 외화 거래내역
-account_list_path = '/v1/kr/bank/b/exchange/transaction-list'
+# 카드 개인 보유내역 조회
+card_list_path = '/v1/kr/card/p/account/card-list'
 
 # 기 발급된 토큰
 token =''
 
 # BodyData
 body = {
-    'connectedId':'엔드유저의 은행/카드사 계정 등록 후 발급받은 커넥티드아이디',
-    'organization':'기관코드',
-    'account':'계좌번호',
-    'startDate':'조회시작일자',
-    'endDate':'조회종료일자',
-    'orderBy':'정렬기준',
-    'currency':'통화코드'
+    'connectedId':'sandbox_connectedId',
+    'organization':'0309',
+    'birthDate':''
 }
 
 # CODEF API 요청
-response_codef_api = http_sender(codef_url + account_list_path, token, body)
+response_codef_api = http_sender(CODEF_URL + card_list_path, token, body)
 
 if response_codef_api.status_code == 200:
     print('정상처리')
@@ -86,7 +84,7 @@ elif response_codef_api.status_code == 401:
     print('error_description = ' + dict['error_description'])
 
     # reissue token
-    response_oauth = request_token(token_url, 'CODEF로부터 발급받은 클라이언트 아이디', 'CODEF로부터 발급받은 시크릿 키')
+    response_oauth = request_token(TOKEN_URL, SANDBOX_CLIENT_ID, SANDBOX_SECERET_KEY);
     if response_oauth.status_code == 200:
         dict = json.loads(response_oauth.text)
         # reissue_token
@@ -94,7 +92,7 @@ elif response_codef_api.status_code == 401:
         print('access_token = ' + token)
 
         # request codef_api
-        response = http_sender(codef_url + account_list_path, token, body)
+        response = http_sender(CODEF_URL + card_list_path, token, body)
 
         # codef_api 응답 결과
         print(response.status_code)
