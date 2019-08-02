@@ -70,7 +70,7 @@ body = {
     'identity':'1138630000',
     'startDate':'201902',
     'inquiryType':'0',
-    'cardNo':'426586******0000',
+    'cardNo':'426586******0000'
 }
 
 # CODEF API 요청
