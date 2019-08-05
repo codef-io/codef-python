@@ -23,7 +23,7 @@ CODEF API를 사용하기 위해서는 'access_token' 발행이 선행되어야 
 'access_token'을 발급 받기 위한 'client_id' 및 'client_secret'은 https://codef.io/#/account/keys 에서 확인할 수 있습니다.
 
 ```python
-token_url = 'https://api.codef.io/oauth/token'
+token_url = 'https://oauth.codef.io/oauth/token'
 response_oauth = request_token(token_url, 'CODEF로부터 발급받은 클라이언트 아이디', 'CODEF로부터 발급받은 시크릿 키')
 if response_oauth.status_code == 200:
     dict = json.loads(response_oauth.text)
