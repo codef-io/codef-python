@@ -21,7 +21,7 @@ CODEF API는 원활한 개발을 위해 샌드박스, 개발, 운영 환경을 �
 
 CODEF API를 사용하기 위해서는 'access_token' 발행이 선행되어야 하며, 거래 시 Header 에 포함하여 요청합니다.  
 'access_token'을 발급 받기 위한 'client_id' 및 'client_secret'은 https://codef.io/#/account/keys 에서 확인할 수 있습니다.  
-발급받은 access_token은 모든 CODEF API 호출 시 Headers 에 추가되어야 합니다. ('Authorization': 'Bearer ' + access_token)
+발급받은 access_token은 **모든 CODEF API 호출 시 Headers 에 추가**되어야 합니다. ('Authorization': 'Bearer ' + access_token)
 
 ```python
 token_url = 'https://oauth.codef.io/oauth/token'
