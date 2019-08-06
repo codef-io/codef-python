@@ -23,6 +23,9 @@ CODEF API를 사용하기 위해서는 'access_token' 발행이 선행되어야 
 'access_token'을 발급 받기 위한 'client_id' 및 'client_secret'은 https://codef.io/#/account/keys 에서 확인할 수 있습니다.  
 발급받은 access_token은 **모든 CODEF API 호출 시 Headers 에 추가**되어야 합니다. ('Authorization': 'Bearer ' + access_token)
 
+* **access_token은 일주일간 유효**합니다. 데이터베이스나 글로벌 변수에 저장하여 재사용하는 것을 권장합니다. 
+* CODEF API를 호출 할 때마다 access_token을 요청하는 것은 퍼포먼스에 부정적입니다.
+
 ```python
 token_url = 'https://oauth.codef.io/oauth/token'
 response_oauth = request_token(token_url, 'CODEF로부터 발급받은 클라이언트 아이디', 'CODEF로부터 발급받은 시크릿 키')
