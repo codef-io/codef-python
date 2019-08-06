@@ -52,6 +52,7 @@ CODEF API를 사용하기 위해서는 엔드유저가 사용하는 대상기관
 
 * 은행/카드 업무의 경우 동일한 기관에 등록 가능한 인증수단은 개인 고객/기업 고객 각각 1건입니다.
 * API서버를 향한 모든 요청 파라미터는 URLEncoder를 통해 UTF-8로 인코딩되어야 합니다. (RegisterAccount.py 참조)
+* 계정 생성 시 포함되는 모든 비밀번호는 API 호출 시 발급된 publicKey 를 통해 암호화 후 전송해야 합니다.
 
 ```python
 codef_account_create_url = 'https://api.codef.io/account/create'
@@ -82,6 +83,23 @@ codef_account_create_body = {
 
 # CODEF API 호출
 response_account_create = http_sender(codef_account_create_url, token, codef_account_create_body)
+```
+```python
+import base64
+
+from Crypto.PublicKey import RSA
+from Crypto.Cipher import PKCS1_v1_5 as Cipher_PKCS1_v1_5
+
+def publicEncRSA(publicKey, data):
+    keyDER = base64.b64decode(pubKey)
+    keyPub = RSA.importKey(keyDER)
+    cipher = Cipher_PKCS1_v1_5.new(keyPub)
+    cipher_text = cipher.encrypt(data.encode())
+
+    encryptedData = base64.b64encode(cipher_text)
+    print('encryptedData = ' + encryptedData)
+
+    return encryptedData
 ```
 ```json
 {
