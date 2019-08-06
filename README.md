@@ -25,6 +25,7 @@ CODEF API를 사용하기 위해서는 'access_token' 발행이 선행되어야 
 
 * **access_token은 일주일간 유효**합니다. 데이터베이스나 글로벌 변수에 저장하여 재사용하는 것을 권장합니다. 
 * CODEF API를 호출 할 때마다 access_token을 요청하는 것은 퍼포먼스에 부정적입니다.
+* 권장하는 흐름은 다음과 같습니다. [1.토큰 발급 -> 2.토큰 저장 -> 3.저장된 토큰을 이용하여 API 호출 -> 4.토큰이 유효하지 않을경우 토큰 재발급 -> 5.API 재시도]
 
 ```python
 token_url = 'https://oauth.codef.io/oauth/token'
