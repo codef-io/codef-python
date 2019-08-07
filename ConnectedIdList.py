@@ -16,18 +16,17 @@ def http_sender(url, token, body):
         'Authorization': 'Bearer ' + token
         }
 
-    response = requests.post(url, headers = headers, data = urllib.quote(str(json.dumps(body))))
+    response = requests.post(url, headers = headers, data = urllib.parse.quote(str(json.dumps(body))))
 
-    # print('//////////////// = ' + urllib.urlencode(json.dumps(body)))
     print('response.status_code = ' + str(response.status_code))
-    print('response.text = ' + urllib.unquote_plus(response.text.encode('utf8')))
+    print('response.text = ' + urllib.parse.unquote_plus(response.text))
 
     return response
 # ========== HTTP 함수  ==========
 
 # ========== Toekn 재발급  ==========
 def request_token(url, client_id, client_secret):
-    authHeader = stringToBase64(client_id + ':' + client_secret)
+    authHeader = stringToBase64(client_id + ':' + client_secret).decode("utf-8")
 
     headers = {
         'Acceppt': 'application/json',
@@ -37,8 +36,8 @@ def request_token(url, client_id, client_secret):
 
     response = requests.post(url, headers = headers, data = 'grant_type=client_credentials&scope=read')
 
-    print('response.status_code = ' + str(response.status_code))
-    print('response.text = ' + response.text)
+    print(response.status_code)
+    print(response.text)
 
     return response
 # ========== Toekn 재발급  ==========
@@ -89,11 +88,12 @@ elif response_connected_id_list.status_code == 401:      # token error
         dict = json.loads(response_oauth.text)
         # reissue_token
         token = dict['access_token']
+        print('access_token = ' + token)
 
         # request codef_api
-        response = http_sender(codef_connected_id_list_url, token, codef_connected_id_list_body)
+        response = http_sender(codef_account_create_url, token, codef_account_create_body)
         if response.status_code == 200:      # success
-            dict = json.loads(urllib.unquote_plus(response.text.encode('utf8')))
+            dict = json.loads(urllib.parse.unquote_plus(response.text))
             if 'data' in dict and str(dict['data']) != '{}':
                 print('조회 정상 처리')
             else:

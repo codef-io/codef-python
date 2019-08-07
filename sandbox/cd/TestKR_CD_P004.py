@@ -12,33 +12,32 @@ import urllib
 # ========== HTTP 기본 함수 ==========
 
 def http_sender(url, token, body):
-    headers = {
-        'Content-Type': 'application/json',
+    headers = {'Content-Type': 'application/json',
         'Authorization': 'Bearer ' + token
-    }
+        }
 
-    response = requests.post(url, headers=headers, data=urllib.parse.quote(json.dumps(body)))
+    response = requests.post(url, headers = headers, data = urllib.parse.quote(str(json.dumps(body))))
 
     print('response.status_code = ' + str(response.status_code))
-    print('response.text = ' + urllib.parse.unquote_plus(response.text, encoding='utf-8'))
+    print('response.text = ' + urllib.parse.unquote_plus(response.text))
 
     return response
 # ========== HTTP 함수  ==========
 
 # ========== Toekn 재발급  ==========
 def request_token(url, client_id, client_secret):
-    authHeader = stringToBase64(client_id + ':' + client_secret)
+    authHeader = stringToBase64(client_id + ':' + client_secret).decode("utf-8")
 
     headers = {
         'Acceppt': 'application/json',
         'Content-Type': 'application/x-www-form-urlencoded',
-        'Authorization': 'Basic ' + authHeader.decode('utf-8')
+        'Authorization': 'Basic ' + authHeader
         }
 
-    response = requests.post(url, headers=headers, data='grant_type=client_credentials&scope=read')
+    response = requests.post(url, headers = headers, data = 'grant_type=client_credentials&scope=read')
 
-    print('response.status_code = ' + str(response.status_code))
-    print('response.text = ' + urllib.parse.unquote_plus(response.text, encoding='utf-8'))
+    print(response.status_code)
+    print(response.text)
 
     return response
 # ========== Toekn 재발급  ==========
@@ -93,10 +92,6 @@ elif response_codef_api.status_code == 401:
 
         # request codef_api
         response = http_sender(CODEF_URL + limit_path, token, body)
-
-        # codef_api 응답 결과
-        print(response.status_code)
-        print(response.text)
     else:
         print('토큰발급 오류')
 else:
