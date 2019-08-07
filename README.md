@@ -51,9 +51,9 @@ else:
 
 ### Install dependencies
 ```python
-$ pip3 install pycrypto
-$ pip3 install urllib
-$ pip3 ...
+> pip3 install pycrypto
+> pip3 install urllib
+> pip3 ...
 ```
 ```python
 
