@@ -29,7 +29,7 @@ def request_token(url, client_id, client_secret):
     authHeader = stringToBase64(client_id + ':' + client_secret).decode("utf-8")
 
     headers = {
-        'Acceppt': 'application/json',
+        'Accept': 'application/json',
         'Content-Type': 'application/x-www-form-urlencoded',
         'Authorization': 'Basic ' + authHeader
         }
