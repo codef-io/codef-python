@@ -53,7 +53,7 @@ def publicEncRSA(publicKey, data):
     cipher = Cipher_PKCS1_v1_5.new(keyPub)
     cipher_text = cipher.encrypt(data.encode())
 
-    encryptedData = base64.b64encode(cipher_text)
+    encryptedData = base64.b64encode(cipher_text).decode("utf-8")
     print('encryptedData = ' + encryptedData)
 
     return encryptedData
