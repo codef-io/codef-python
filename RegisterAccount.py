@@ -19,18 +19,17 @@ def http_sender(url, token, body):
         'Authorization': 'Bearer ' + token
         }
 
-    response = requests.post(url, headers = headers, data = urllib.quote(str(json.dumps(body))))
+    response = requests.post(url, headers = headers, data = urllib.parse.quote(str(json.dumps(body))))
 
-    # print('//////////////// = ' + urllib.urlencode(json.dumps(body)))
     print('response.status_code = ' + str(response.status_code))
-    print('response.text = ' + urllib.unquote_plus(response.text.encode('utf8')))
+    print('response.text = ' + urllib.parse.unquote_plus(response.text))
 
     return response
 # ========== HTTP 함수  ==========
 
 # ========== Toekn 재발급  ==========
 def request_token(url, client_id, client_secret):
-    authHeader = stringToBase64(client_id + ':' + client_secret)
+    authHeader = stringToBase64(client_id + ':' + client_secret).decode("utf-8")
 
     headers = {
         'Acceppt': 'application/json',
@@ -112,7 +111,7 @@ codef_account_create_body = {
 
 response_account_create = http_sender(codef_account_create_url, token, codef_account_create_body)
 if response_account_create.status_code == 200:      # success
-    dict = json.loads(urllib.unquote_plus(response_account_create.text.encode('utf8')))
+    dict = json.loads(urllib.parse.unquote_plus(response_account_create.text.encode('utf8')))
     if 'data' in dict and str(dict['data']) != '{}':
         data = dict['data']
         if 'connectedId' in data:
@@ -120,7 +119,7 @@ if response_account_create.status_code == 200:      # success
             print('connected_id = ' + connected_id)
             print('계정생성 정상처리')
     else:
-        print(urllib.unquote_plus(response_account_create.text.encode('utf8')))
+        print(urllib.parse.unquote_plus(response_account_create.text.encode('utf8')))
         print('계정생성 오류')
 elif response_account_create.status_code == 401:      # token error
     dict = json.loads(response_account_create.text)
@@ -140,7 +139,7 @@ elif response_account_create.status_code == 401:      # token error
         # request codef_api
         response = http_sender(codef_account_create_url, token, codef_account_create_body)
         if response.status_code == 200:      # success
-            dict = json.loads(urllib.unquote_plus(response.text.encode('utf8')))
+            dict = json.loads(urllib.parse.unquote_plus(response.text))
             if 'data' in dict and str(dict['data']) != '{}':
                 data = dict['data']
                 if 'connectedId' in data:
@@ -202,7 +201,7 @@ elif response_account_add.status_code == 401:      # token error
     print('error_description = ' + dict['error_description'])
 
     # reissue token
-    response_oauth = request_token(token_url, 'CODEF로부터 발급받은 클라이언트 아이디', 'CODEF로부터 발급받은 시크릿 키');
+    response_oauth = request_token(token_url, 'CODEF로부터 발급받은 클라이언트 아이디', 'CODEF로부터 발급받은 시크릿 키')
     if response_oauth.status_code == 200:
         dict = json.loads(response_oauth.text)
         # reissue_token
@@ -260,7 +259,7 @@ codef_account_update_body = {
 
 response_account_update = http_sender(codef_account_update_url, token, codef_account_update_body)
 if response_account_update.status_code == 200:      # success
-    dict = json.loads(urllib.unquote_plus(response_account_update.text.encode('utf8')))
+    dict = json.loads(urllib.parse.unquote_plus(response_account_update.text))
     if 'data' in dict and str(dict['data']) != '{}':
         data = dict['data']
         if 'connectedId' in data:
@@ -277,7 +276,7 @@ elif response_account_update.status_code == 401:      # token error
     print('error_description = ' + dict['error_description'])
 
     # reissue token
-    response_oauth = request_token(token_url, 'CODEF로부터 발급받은 클라이언트 아이디', 'CODEF로부터 발급받은 시크릿 키');
+    response_oauth = request_token(token_url, 'CODEF로부터 발급받은 클라이언트 아이디', 'CODEF로부터 발급받은 시크릿 키')
     if response_oauth.status_code == 200:
         dict = json.loads(response_oauth.text)
         # reissue_token
@@ -287,7 +286,7 @@ elif response_account_update.status_code == 401:      # token error
         # request codef_api
         response = http_sender(codef_account_update_url, token, codef_account_update_body)
         if response.status_code == 200:      # success
-            dict = json.loads(urllib.unquote_plus(response.text.encode('utf8')))
+            dict = json.loads(urllib.parse.unquote_plus(response.text))
             if 'data' in dict and str(dict['data']) != '{}':
                 data = dict['data']
                 if 'connectedId' in data:
@@ -337,7 +336,7 @@ codef_account_delete_body = {
 
 response_account_delete = http_sender(codef_account_delete_url, token, codef_account_delete_body)
 if response_account_delete.status_code == 200:      # success
-    dict = json.loads(urllib.unquote_plus(response_account_delete.text.encode('utf8')))
+    dict = json.loads(urllib.parse.unquote_plus(response_account_delete.text))
     if 'data' in dict and str(dict['data']) != '{}':
         data = dict['data']
         if 'connectedId' in data:
@@ -354,7 +353,7 @@ elif response_account_delete.status_code == 401:      # token error
     print('error_description = ' + dict['error_description'])
 
     # reissue token
-    response_oauth = request_token(token_url, 'CODEF로부터 발급받은 클라이언트 아이디', 'CODEF로부터 발급받은 시크릿 키');
+    response_oauth = request_token(token_url, 'CODEF로부터 발급받은 클라이언트 아이디', 'CODEF로부터 발급받은 시크릿 키')
     if response_oauth.status_code == 200:
         dict = json.loads(response_oauth.text)
         # reissue_token
@@ -364,7 +363,7 @@ elif response_account_delete.status_code == 401:      # token error
         # request codef_api
         response = http_sender(codef_account_delete_url, token, codef_account_delete_body)
         if response.status_code == 200:      # success
-            dict = json.loads(urllib.unquote_plus(response.text.encode('utf8')))
+            dict = json.loads(urllib.parse.unquote_plus(response.text))
             if 'data' in dict and str(dict['data']) != '{}':
                 data = dict['data']
                 if 'connectedId' in data:
