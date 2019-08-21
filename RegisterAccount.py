@@ -93,7 +93,7 @@ pubKey = 'CODEF로부터 발급받은 publicKey'
 #
 ##############################################################################
 print('=============================== 계정생성 ===============================')
-codef_account_create_url = 'https://tapi.codef.io/v1/account/create'
+codef_account_create_url = 'https://api.codef.io/v1/account/create'
 codef_account_create_body = {
             'accountList':[
                 {
@@ -173,7 +173,7 @@ else:
 #
 ##############################################################################
 print('=============================== 계정추가 ===============================')
-codef_account_add_url = 'https://tapi.codef.io/v1/account/add'
+codef_account_add_url = 'https://api.codef.io/v1/account/add'
 codef_account_add_body = {
             'connectedId': '8-cXc.6lk-ib4Whi5zClVt',    # connected_id
             'accountList':[
@@ -240,7 +240,7 @@ else:
 #
 ##############################################################################
 print('=============================== 계정수정 ===============================')
-codef_account_update_url = 'https://tapi.codef.io/v1/account/update'
+codef_account_update_url = 'https://api.codef.io/v1/account/update'
 codef_account_update_body = {
             'connectedId': '8-cXc.6lk-ib4Whi5zClVt',        # connected_id
             'accountList':[
@@ -320,7 +320,7 @@ else:
 #
 ##############################################################################
 print('=============================== 계정삭제 ===============================')
-codef_account_delete_url = 'https://tapi.codef.io/v1/account/delete'
+codef_account_delete_url = 'https://api.codef.io/v1/account/delete'
 codef_account_delete_body = {
             'connectedId': '8-cXc.6lk-ib4Whi5zClVt',        # connected_id
             'accountList':[
