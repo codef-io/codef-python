@@ -68,7 +68,7 @@ CODEF API를 사용하기 위해서는 엔드유저가 사용하는 대상기관
 * 계정 생성 시 포함되는 모든 비밀번호는 API 호출 시 발급된 publicKey 를 통해 암호화 후 전송해야 합니다.
 
 ```python
-codef_account_create_url = 'https://api.codef.io/account/create'
+codef_account_create_url = 'https://api.codef.io/v1/account/create'
 codef_account_create_body = {
             'accountList':[                    # 계정목록
                 {
@@ -155,7 +155,7 @@ def publicEncRSA(publicKey, data):
 * API서버를 향한 모든 요청 파라미터는 URLEncoder를 통해 UTF-8로 인코딩되어야 합니다. (RegisterAccount.py 참조)
 
 ```python
-codef_account_add_url = 'https://api.codef.io/account/add'
+codef_account_add_url = 'https://api.codef.io/v1/account/add'
 codef_account_add_body = {
             'connectedId': '엔드유저의 은행/카드사 계정 등록 후 발급받은 커넥티드아이디 입력',    # connectedId
             'accountList':[                  # 계정목록
@@ -207,7 +207,7 @@ response_account_add = http_sender(codef_account_add_url, token, codef_account_a
 * API서버를 향한 모든 요청 파라미터는 URLEncoder를 통해 UTF-8로 인코딩되어야 합니다. (RegisterAccount.py 참조)
 
 ```python
-codef_account_update_url = 'https://api.codef.io/account/update'
+codef_account_update_url = 'https://api.codef.io/v1/account/update'
 codef_account_update_body = {
             'connectedId': '계정생성 시 발급받은 아이디',    # connectedId
             'accountList':[                    # 계정목록
@@ -259,7 +259,7 @@ response_account_update = http_sender(codef_account_update_url, token, codef_acc
 * API서버를 향한 모든 요청 파라미터는 URLEncoder를 통해 UTF-8로 인코딩되어야 합니다. (RegisterAccount.py 참조)
 
 ```python
-codef_account_delete_url = 'https://api.codef.io/account/delete'
+codef_account_delete_url = 'https://api.codef.io/v1/account/delete'
 codef_account_delete_body = {
             'connectedId': '계정생성 시 발급받은 아이디',    # connectedId
             'accountList':[                    # 계정목록
