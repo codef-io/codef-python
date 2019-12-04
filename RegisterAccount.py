@@ -67,7 +67,7 @@ def base64ToString(b):
 # ========== Encode string data  ==========
 
 # token URL
-token_url = 'https://toauth.codef.io/oauth/token'
+token_url = 'https://oauth.codef.io/oauth/token'
 
 # CODEF 연결 아이디
 connected_id = ''

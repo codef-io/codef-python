@@ -51,7 +51,7 @@ def base64ToString(b):
 # ========== Encode string data  ==========
 
 # token URL
-token_url = 'https://toauth.codef.io/oauth/token'
+token_url = 'https://oauth.codef.io/oauth/token'
 
 # 기 발급된 토큰
 token =''
@@ -63,7 +63,7 @@ token =''
 # pageNo : 페이지 번호(생략 가능) 생략시 1페이지 값(0) 자동 설정
 #
 ##############################################################################
-codef_connected_id_list_url = 'https://tapi.codef.io/v1/account/connectedId-list'
+codef_connected_id_list_url = 'https://development.codef.io/v1/account/connectedId-list'
 codef_connected_id_list_body = {
     'pageNo':'5'            # 페이지 번호(생략 가능) 생략시 1페이지 값(0) 자동 설정
 }

@@ -62,10 +62,10 @@ def base64ToString(b):
 # ========== Encode string data  ==========
 
 # token URL
-token_url = 'https://toauth.codef.io/oauth/token'
+token_url = 'https://oauth.codef.io/oauth/token'
 
 # token URL
-token_url = 'https://toauth.codef.io/oauth/token'
+token_url = 'https://oauth.codef.io/oauth/token'
 
 # CODEF 연결 아이디
 connected_id = '엔드유저의 은행/카드사 계정 등록 후 발급받은 커넥티드아이디'
@@ -92,7 +92,7 @@ print('=============================== 계정목록 ============================
 
 
 # encryptedPassword = encrypt = pubkey.encrypt(message.encode(), 32)
-codef_account_create_url = 'https://tapi.codef.io/v1/account/list'
+codef_account_create_url = 'https://development.codef.io/v1/account/list'
 # codef_account_create_url = 'http://192.168.10.126:8101/v1/account/create'
 codef_account_create_body = {
             'connectedId':connected_id

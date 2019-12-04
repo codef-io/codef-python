@@ -51,8 +51,8 @@ def base64ToString(b):
 # ========== Encode string data  ==========
 
 # CodefURL
-codef_url = 'https://tapi.codef.io'
-token_url = 'https://toauth.codef.io/oauth/token'
+codef_url = 'https://development.codef.io'
+token_url = 'https://oauth.codef.io/oauth/token'
 
 # 카드 법인 보유내역 조회
 card_list_path = '/v1/kr/card/b/account/card-list'
