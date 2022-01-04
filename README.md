@@ -4,7 +4,7 @@ Python sample for CODEF API
 ## Documentation
 
 본 샘플은 CODEF API의 연동을 위한 공통 코드를 포함하고 있으며, 지원하는 모든 API의 엔드포인트(은행, 카드, 보험, 증권, 공공, 기타)는
-https://develpers.codef.io 를 통해 확인할 수 있습니다.
+https://developer.codef.io 를 통해 확인할 수 있습니다.
 
 ## CODEF API Env
 
